@@ -16,7 +16,7 @@ Nvidia is a Fortune 500 company that provides developer APIs and integration cap
 ## Timestamps
 
 - **Created:** 2026-03-21
-- **Modified:** 2026-03-21
+- **Modified:** 2026-04-28
 
 ## APIs
 
@@ -33,7 +33,6 @@ NVIDIA provides developer APIs for GPU computing, AI/ML model training and infer
 #### Properties
 
 - [Documentation](https://developer.nvidia.com/)
-- [OpenAPI](openapi/nvidia-nvidia-api-openapi.yml)
 
 ## Common Properties
 
