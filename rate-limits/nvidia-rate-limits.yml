@@ -4,7 +4,8 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Nvidia
 providerId: nvidia
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - GPU
   - AI
@@ -12,78 +13,55 @@ tags:
   - Computing
   - Graphics
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Nvidia API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+description: NVIDIA's developer API surface is multi-product. build.nvidia.com hosted NIM endpoints have
+  per-account / per-API-key rate limits and free-credit budgets that rotate by promotion; specific RPM/TPM
+  numbers are not consistently published. Self-hosted NIM (via AI Enterprise license) has no NVIDIA-side
+  rate limits — throughput is bounded by the customer's GPU hardware. NGC downloads are throttled per-IP
+  by the catalog CDN.
+notes: NVIDIA does not publish consistent numeric rate limits across its developer surfaces. Self-hosted
+  deployments have no NVIDIA-imposed throttle; hosted endpoints throttle per-key with values that vary
+  by service.
+sources:
+  - https://build.nvidia.com/
+  - https://docs.api.nvidia.com/
+  - https://docs.nvidia.com/ngc/
 responseCodes:
+  unauthorized: 401
+  forbidden: 403
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
+  - name: build.nvidia.com hosted endpoints
     scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
+    metric: varies
+    limit: per-key throttle and free-credit budget; specific RPM/TPM not publicly documented
     applies:
       - NVIDIA Developer API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
+  - name: Self-hosted NIM (AI Enterprise)
+    scope: cluster
+    metric: requests_per_second
+    limit: bounded by customer GPU hardware; no NVIDIA-imposed rate limit
     applies:
       - NVIDIA Developer API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - NVIDIA Developer API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - NVIDIA Developer API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
+  - name: NGC Catalog downloads
+    scope: IP
+    metric: varies
+    limit: CDN-throttled per-IP; not numerically published
     applies:
       - NVIDIA Developer API
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: API key required
+    description: All hosted NIM endpoints (build.nvidia.com, integrate.api.nvidia.com) require an NVIDIA
+      developer API key passed via Authorization Bearer header.
+  - name: Backoff
+    description: Implement exponential backoff with jitter on 429 responses. Honor Retry-After when present.
+  - name: Free-credit exhaustion
+    description: When free-trial credits on build.nvidia.com are exhausted, requests return an authorization
+      error rather than a throttle; obtain an AI Enterprise license or cloud-marketplace credentials for
+      production.
+  - name: Self-host for high throughput
+    description: For sustained high-throughput inference, deploy NIM containers on customer GPU infrastructure
+      under AI Enterprise rather than calling hosted endpoints.
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com

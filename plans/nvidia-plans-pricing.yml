@@ -4,138 +4,146 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Nvidia
 providerId: nvidia
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - GPU
   - AI
   - Machine Learning
   - Computing
   - Graphics
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: NVIDIA's developer API surface spans multiple commercial products with distinct pricing.
+  build.nvidia.com offers free trial credits to call hosted NIM microservices for evaluation. NGC catalog
+  downloads are free for development and prototyping. Production deployment of NIM/AI Enterprise requires
+  a paid AI Enterprise license (per-GPU per-year) sold by NVIDIA sales or partners; cloud marketplace
+  hourly rates are available on AWS, Azure, and GCP. CUDA, Omniverse, and DGX Cloud each have their own
+  pricing tracks. Public list prices for AI Enterprise are not published.
+notes: NVIDIA does not publish list pricing for AI Enterprise per-GPU/year on its public website. Free-tier
+  credit values for build.nvidia.com fluctuate. Update once NVIDIA publishes specific list rates.
+sources:
+  - https://www.nvidia.com/en-us/data-center/products/ai-enterprise/
+  - https://build.nvidia.com/
+  - https://docs.api.nvidia.com/
+  - https://catalog.ngc.nvidia.com/
 plans:
-  - id: nvidia-free
-    name: Free
+  - id: nvidia-build-trial
+    name: build.nvidia.com Free Credits
     type: freemium
-    description: Free entry tier for the Nvidia API surface. Intended for evaluation, prototyping, and
-      low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    description: Free trial credits to call hosted NIM microservices on build.nvidia.com for evaluation
+      and prototyping. Account required.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Trial credits
+        name: build_credits
         type: quota
-        metric: requests
-        limit: 1000
-        timeFrame: month
+        metric: credit
+        limit: see build.nvidia.com (rotating free-credit allocation)
+        timeFrame: usage
         geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
-        geo: global
-        domains: []
+        domains:
+          - https://integrate.api.nvidia.com
+          - https://api.nvcf.nvidia.com
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
-      - name: NVIDIA Developer API
-  - id: nvidia-pro
-    name: Professional
-    type: paid
-    description: Production tier for Nvidia. Provides higher quotas, priority support, and access to the
-      broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+      - name: Free trial credits
+      - name: Hosted NIM microservices
+      - name: 100+ models (LLMs, retrieval, multimodal, healthcare)
+  - id: nvidia-ngc-catalog
+    name: NGC Catalog (Development)
+    type: freemium
+    description: Free downloads of NIM containers, pretrained models, and AI workflows from NGC for development
+      and prototyping. Production use requires AI Enterprise license.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: 100000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: TBD
-        userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
+      - label: NGC catalog downloads
+        name: ngc_downloads
         type: metered
-        metric: requests
+        metric: download
         limit: -1
-        timeFrame: month
+        timeFrame: usage
         geo: global
-        domains: []
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
-      - name: NVIDIA Developer API
-  - id: nvidia-enterprise
-    name: Enterprise
-    type: enterprise
-    description: Custom-negotiated tier for Nvidia. Includes dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management.
+      - name: NIM container downloads
+      - name: Pretrained models
+      - name: Workflow blueprints
+      - name: Development use only (production requires AI Enterprise)
+  - id: nvidia-ai-enterprise-trial
+    name: NVIDIA AI Enterprise — 90-Day Trial
+    type: freemium
+    description: 90-day production trial license available upon request for AI Enterprise software stack
+      including NIM, Triton, RAPIDS.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
-        type: quota
-        metric: requests
-        limit: -1
-        timeFrame: month
-        geo: configurable
-        domains: []
+      - label: 90-day trial
+        name: aie_trial
+        type: subscription
+        metric: contract
+        limit: 1
+        timeFrame: usage
+        geo: global
         unit: 1
-        price: custom
-        userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
-        geo: configurable
-        domains: []
-        unit: 1
-        price: custom
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
+      - name: 90-day production trial
+      - name: NIM microservices
+      - name: Triton Inference Server
+      - name: RAPIDS / cuOpt
+  - id: nvidia-ai-enterprise
+    name: NVIDIA AI Enterprise
+    type: enterprise
+    description: Production AI Enterprise license, priced per GPU per year via NVIDIA sales or partners.
+      Public list price not published; cloud marketplace hourly rates available on AWS / Azure / GCP.
+    entries:
+      - label: Per-GPU subscription
+        name: aie_gpu_year
+        type: subscription
+        metric: gpu
+        limit: -1
+        timeFrame: year
+        geo: global
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+      - label: Cloud marketplace hourly
+        name: aie_hourly_cloud
+        type: metered
+        metric: gpu-hour
+        limit: -1
+        timeFrame: usage
+        geo: global
+        unit: 1
+        price: see AWS/Azure/GCP marketplace
+        userMultiplied: false
+    elements:
+      - name: Production NIM microservices
+      - name: Enterprise support
+      - name: Per-GPU/year licensing
+      - name: Cloud marketplace hourly
+      - name: Triton Inference Server
       - name: NVIDIA Developer API
+  - id: nvidia-dgx-cloud
+    name: DGX Cloud / DGX Cloud Lepton
+    type: usage-based
+    description: NVIDIA's hosted GPU cloud service. Pricing per-instance-hour or per-month commit, billed
+      directly or via cloud marketplaces.
+    entries:
+      - label: Hosted GPU instance
+        name: dgx_instance
+        type: metered
+        metric: instance-hour
+        limit: -1
+        timeFrame: usage
+        geo: configurable
+        unit: 1
+        price: contact sales
+        userMultiplied: false
+    elements:
+      - name: Multi-cloud GPU access
+      - name: Pre-configured AI training stack
+      - name: Per-instance-hour or commit pricing
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com

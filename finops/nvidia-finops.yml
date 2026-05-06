@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,10 +9,11 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Nvidia
 providerId: nvidia
-publisherName: Nvidia
-serviceCategory: API
+publisherName: NVIDIA Corporation
+serviceCategory: AI Infrastructure
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - GPU
   - AI
@@ -21,114 +23,111 @@ tags:
   - FinOps
   - Cost Management
   - FOCUS
-description: FinOps framework definition for the Nvidia API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+description: 'FOCUS-aligned FinOps for NVIDIA: hybrid commercial model spanning per-GPU/year AI Enterprise
+  subscriptions (sold direct or via channel), hourly cloud marketplace SKUs (AWS/Azure/GCP), DGX Cloud
+  hosted GPU rentals, and free build.nvidia.com trial credits. Cost allocation is GPU-centric: licenses,
+  cloud-instance hours, and inference token throughput.'
+sources:
+  - https://www.nvidia.com/en-us/data-center/products/ai-enterprise/
+  - https://build.nvidia.com/
+  - https://catalog.ngc.nvidia.com/
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: For AI Enterprise direct contracts, track per-GPU license entitlement vs. utilization.
+      For cloud marketplace consumption, pull FOCUS-aligned cost exports from AWS/Azure/GCP. For build.nvidia.com,
+      track per-API-key request and credit consumption via the NVIDIA developer dashboard.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Tag inference workloads (Kubernetes namespaces, model name, team) so per-GPU AI Enterprise
+      cost can be split across consuming products. For build.nvidia.com, allocate per-API-key.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Self-host NIM under AI Enterprise once steady-state inference exceeds the break-even
+      vs hosted endpoints. Right-size GPU type (L4/L40S/H100) per model size. Use TensorRT/Triton dynamic
+      batching to lift GPU utilization. For training spikes, burst to DGX Cloud or cloud marketplace rather
+      than buying additional perpetual capacity.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+    description: Designate per-cluster GPU owners for utilization targets (>= 60% on production AI Enterprise
+      GPUs is a common SLO). Review monthly cloud-marketplace burn against forecast; flag idle GPU instances
+      within 24 hours.
 billingModel:
-  pricingCategory: Usage-Based
-  billingFrequency: Monthly
+  pricingCategory: Subscription (Per-GPU) + Pay-As-You-Go (Cloud Marketplace) + Free Trial
+  billingFrequency: Annual (subscription) or Hourly (cloud)
   billingCurrency: USD
   chargeCategories:
-    - Usage
     - Purchase
+    - Usage
     - Tax
     - Credit
     - Adjustment
   chargeFrequency: Recurring
 focusColumns:
-  ServiceName: Nvidia
-  ServiceCategory: Developer Tools / API
-  ProviderName: Nvidia
-  PublisherName: Nvidia
-  InvoiceIssuerName: Nvidia
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  ServiceName: NVIDIA AI / Developer Platform
+  ServiceCategory: AI Infrastructure
+  ProviderName: NVIDIA
+  PublisherName: NVIDIA Corporation
+  InvoiceIssuerName: NVIDIA Corporation (or AWS/Azure/GCP for marketplace)
+  PricingCategory: Subscription
+  PricingUnit: gpu
   BillingCurrency: USD
-  ChargeCategory: Usage
+  ChargeCategory: Purchase
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: ai_enterprise_gpu_subscription
+    description: Per-GPU per-year AI Enterprise software subscription
+    unit: gpu-year
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - gpu_model
+      - cluster
       - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+  - name: ai_enterprise_marketplace_hours
+    description: AI Enterprise hourly metered consumption on cloud marketplaces
+    unit: gpu-hour
     aggregation: sum
     dimensions:
-      - api
+      - cloud
       - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
+      - gpu_model
+  - name: dgx_cloud_instance_hours
+    description: DGX Cloud / DGX Cloud Lepton hosted GPU instance hours
+    unit: instance-hour
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
+      - cloud
+      - region
+      - instance_type
+  - name: build_api_credits
+    description: build.nvidia.com NIM endpoint credit consumption
+    unit: credit
+    aggregation: sum
+    dimensions:
+      - model
+      - api_key
+  - name: inference_tokens
+    description: Inference tokens generated (input/output) on hosted or self-hosted NIM (operational telemetry)
+    unit: token
+    aggregation: sum
+    dimensions:
+      - model
+      - direction
 apis:
   - name: NVIDIA Developer API
-    baseURL: ''
+    baseURL: https://integrate.api.nvidia.com
     tags:
       - GPU
       - AI
       - Machine Learning
-      - Computing
-      - Graphics
+      - Inference
     serviceName: NVIDIA Developer API
-    serviceCategory: API
+    serviceCategory: AI Infrastructure
 unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+  - name: Cost per inference token (hosted)
+    metric: build_credits_cost / inference_tokens
+    target: compare against self-hosted break-even
+  - name: GPU utilization
+    metric: gpu_busy_seconds / gpu_allocated_seconds
+    target: '>= 0.6 on production AI Enterprise clusters'
+  - name: Cost per million tokens (self-hosted)
+    metric: (ai_enterprise_subscription + power + amortized_hardware) / (inference_tokens / 1000000)
+    target: minimize via Triton dynamic batching
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
