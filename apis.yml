@@ -5,7 +5,7 @@ description: >-
   capabilities through its developer platform. NVIDIA provides developer APIs
   for GPU computing, AI/ML model training and inference, and graphics. The
   platform includes APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
-type: Contract
+kind: contract
 position: Consuming
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
