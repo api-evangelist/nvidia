@@ -38,6 +38,10 @@ apis:
       - type: Documentation
         url: https://developer.nvidia.com/
 common:
+  - type: GitHubOrganization
+    url: https://github.com/NVIDIA
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/nvidia
   - type: Website
     url: https://www.nvidia.com
 maintainers:
