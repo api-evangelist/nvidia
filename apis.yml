@@ -44,6 +44,8 @@ common:
     url: https://www.linkedin.com/company/nvidia
   - type: Website
     url: https://www.nvidia.com
+  - type: LLMsTxt
+    url: https://developer.nvidia.com/llms.txt
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
