@@ -1,52 +1,51 @@
 aid: nvidia
 name: Nvidia
-description: >-
-  Nvidia is a Fortune 500 company that provides developer APIs and integration
-  capabilities through its developer platform. NVIDIA provides developer APIs
-  for GPU computing, AI/ML model training and inference, and graphics. The
-  platform includes APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
+description: Nvidia is a Fortune 500 company that provides developer APIs and integration
+  capabilities through its developer platform. NVIDIA provides developer APIs for
+  GPU computing, AI/ML model training and inference, and graphics. The platform includes
+  APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
 kind: contract
 position: Consuming
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+- GPU
+- AI
+- Machine Learning
+- Computing
+- Graphics
+- Fortune 1000
+url: https://raw.githubusercontent.com/api-evangelist/nvidia/refs/heads/main/apis.yml
+created: '2026-03-21'
+modified: '2026-04-28'
+specificationVersion: '0.19'
+apis:
+- aid: nvidia:nvidia-developer
+  name: NVIDIA Developer API
+  description: NVIDIA provides developer APIs for GPU computing, AI/ML model training
+    and inference, and graphics. The platform includes APIs for CUDA, TensorRT, Omniverse,
+    and cloud GPU services.
+  humanURL: https://developer.nvidia.com/
+  tags:
   - GPU
   - AI
   - Machine Learning
   - Computing
   - Graphics
-  - Fortune 1000
-url: >-
-  https://raw.githubusercontent.com/api-evangelist/nvidia/refs/heads/main/apis.yml
-created: '2026-03-21'
-modified: '2026-04-28'
-specificationVersion: '0.19'
-apis:
-  - aid: nvidia:nvidia-developer
-    name: NVIDIA Developer API
-    description: >-
-      NVIDIA provides developer APIs for GPU computing, AI/ML model training
-      and inference, and graphics. The platform includes APIs for CUDA,
-      TensorRT, Omniverse, and cloud GPU services.
-    humanURL: https://developer.nvidia.com/
-    tags:
-      - GPU
-      - AI
-      - Machine Learning
-      - Computing
-      - Graphics
-    properties:
-      - type: Documentation
-        url: https://developer.nvidia.com/
+  properties:
+  - type: Documentation
+    url: https://developer.nvidia.com/
+  - url: graphql/nvidia-graphql.md
+    type: GraphQL
 common:
-  - type: GitHubOrganization
-    url: https://github.com/NVIDIA
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/nvidia
-  - type: Website
-    url: https://www.nvidia.com
-  - type: LLMsTxt
-    url: https://developer.nvidia.com/llms.txt
+- type: GitHubOrganization
+  url: https://github.com/NVIDIA
+- type: LinkedIn
+  url: https://www.linkedin.com/company/nvidia
+- type: Website
+  url: https://www.nvidia.com
+- type: LLMsTxt
+  url: https://developer.nvidia.com/llms.txt
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
+- FN: API Evangelist
+  email: info@apievangelist.com

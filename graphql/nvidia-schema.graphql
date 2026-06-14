@@ -1,0 +1,1026 @@
+"""
+NVIDIA GraphQL Schema
+Covers GPU hardware, CUDA compute, AI/ML training and inference,
+NGC registry, NIM microservices, DGX/HGX/OVX cloud infrastructure,
+and developer management.
+
+Sources:
+  - https://developer.nvidia.com/
+  - https://catalog.ngc.nvidia.com/
+  - https://build.nvidia.com/
+  - https://github.com/NVIDIA
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum GPUArchitectureFamily {
+  HOPPER
+  ADA_LOVELACE
+  AMPERE
+  TURING
+  VOLTA
+  PASCAL
+  MAXWELL
+  KEPLER
+}
+
+enum MemoryType {
+  HBM3
+  HBM2E
+  HBM2
+  GDDR7
+  GDDR6X
+  GDDR6
+  GDDR5
+}
+
+enum PrecisionMode {
+  FP64
+  FP32
+  FP16
+  BF16
+  INT8
+  INT4
+  FP8
+}
+
+enum TrainingStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+  PAUSED
+}
+
+enum InferenceStatus {
+  ACTIVE
+  INACTIVE
+  SCALING
+  ERROR
+}
+
+enum ContainerStatus {
+  AVAILABLE
+  DEPRECATED
+  BETA
+  GA
+}
+
+enum InstanceStatus {
+  RUNNING
+  STOPPED
+  TERMINATED
+  PENDING
+  ERROR
+}
+
+enum NIMStatus {
+  DEPLOYED
+  DEPLOYING
+  FAILED
+  STOPPED
+}
+
+enum HealthStatus {
+  HEALTHY
+  DEGRADED
+  UNHEALTHY
+  UNKNOWN
+}
+
+enum WebhookEvent {
+  TRAINING_STARTED
+  TRAINING_COMPLETED
+  TRAINING_FAILED
+  INFERENCE_DEPLOYED
+  INFERENCE_STOPPED
+  MODEL_PUBLISHED
+  INSTANCE_STARTED
+  INSTANCE_STOPPED
+}
+
+# ---------------------------------------------------------------------------
+# GPU Hardware Types
+# ---------------------------------------------------------------------------
+
+"""Physical GPU device with full hardware specification."""
+type GPU {
+  id: ID!
+  name: String!
+  model: GPUModel!
+  architecture: GPUArchitecture!
+  cudaCores: CUDACore!
+  tensorCores: TensorCore!
+  rtCores: RTCore
+  vram: VRAM!
+  memoryBandwidth: MemoryBandwidth!
+  tdp: TDP!
+  performanceMarks: [PerformanceMark!]!
+  dlssSupport: DLSS
+  rayTracingSupport: RayTracing
+  nvlinkPorts: Int
+  pcieLanes: Int
+  releaseDate: DateTime
+  msrp: Float
+}
+
+"""Logical GPU model identifier (e.g. H100, A100, RTX 4090)."""
+type GPUModel {
+  id: ID!
+  name: String!
+  sku: String
+  architecture: GPUArchitecture!
+  targetMarket: String
+  computeCapability: String
+  maxVRAMGB: Int
+  precisionModes: [PrecisionMode!]!
+  tdpWatts: Int
+  releaseYear: Int
+}
+
+"""GPU micro-architecture (Hopper, Ada Lovelace, Ampere, etc.)."""
+type GPUArchitecture {
+  id: ID!
+  name: String!
+  family: GPUArchitectureFamily!
+  processNode: String
+  transistorBillions: Float
+  dieAreaMM2: Float
+  maxCUDAVersion: String
+  features: [String!]!
+  models: [GPUModel!]!
+}
+
+"""CUDA shader core count and configuration."""
+type CUDACore {
+  count: Int!
+  clockMHz: Int
+  fp32TFLOPS: Float
+  fp64TFLOPS: Float
+}
+
+"""Tensor Core units for matrix multiply-accumulate operations."""
+type TensorCore {
+  generation: Int!
+  count: Int!
+  fp16TFLOPS: Float
+  bf16TFLOPS: Float
+  tf32TFLOPS: Float
+  int8TOPS: Float
+  fp8TFLOPS: Float
+  sparsityMultiplier: Float
+}
+
+"""RT Core units for hardware ray-triangle intersection."""
+type RTCore {
+  generation: Int!
+  count: Int!
+  gigaraysPerSecond: Float
+}
+
+"""GPU video memory specification."""
+type VRAM {
+  capacityGB: Int!
+  memoryType: MemoryType!
+  busWidthBits: Int!
+  clockMHz: Int
+  eccSupported: Boolean!
+}
+
+"""GPU memory bandwidth measurement."""
+type MemoryBandwidth {
+  gbPerSecond: Float!
+  l2CacheMB: Float
+}
+
+"""Thermal design power envelope."""
+type TDP {
+  maxWatts: Int!
+  typicalWatts: Int
+  minWatts: Int
+  coolingRequirement: String
+}
+
+# ---------------------------------------------------------------------------
+# Performance and Feature Types
+# ---------------------------------------------------------------------------
+
+"""Benchmark performance result for a GPU."""
+type PerformanceMark {
+  id: ID!
+  name: String!
+  score: Float!
+  unit: String!
+  workload: String
+  precision: PrecisionMode
+  gpu: GPU!
+  measuredAt: DateTime
+}
+
+"""DLSS (Deep Learning Super Sampling) capability overview."""
+type DLSS {
+  supported: Boolean!
+  maxVersion: String!
+  dlss2: DLSS2
+  dlss3: DLSS3
+  supportedResolutions: [String!]!
+}
+
+"""DLSS 2 super-resolution capability."""
+type DLSS2 {
+  supported: Boolean!
+  modes: [String!]!
+  maxOutputResolution: String
+}
+
+"""DLSS 3 Frame Generation capability."""
+type DLSS3 {
+  supported: Boolean!
+  frameGenerationSupported: Boolean!
+  rayReconstructionSupported: Boolean!
+  multiFrameGenerationSupported: Boolean
+}
+
+"""Hardware ray tracing capability."""
+type RayTracing {
+  supported: Boolean!
+  rtCoreGeneration: Int
+  maxGigaraysPerSecond: Float
+  dlssRRSupported: Boolean
+}
+
+# ---------------------------------------------------------------------------
+# AI/ML Compute Types
+# ---------------------------------------------------------------------------
+
+"""Multi-dimensional numerical tensor used in AI computation."""
+type Tensor {
+  id: ID!
+  name: String
+  shape: [Int!]!
+  dtype: String!
+  device: String
+  sizeBytes: Int
+}
+
+"""Single inference request and its result."""
+type Inference {
+  id: ID!
+  model: AIModel!
+  endpoint: NIMEndpoint
+  inputTokens: Int
+  outputTokens: Int
+  latencyMs: Float
+  status: InferenceStatus!
+  result: JSON
+  createdAt: DateTime!
+}
+
+"""AI/ML training job running on GPU infrastructure."""
+type TrainingJob {
+  id: ID!
+  name: String!
+  model: AIModel!
+  status: TrainingStatus!
+  gpuCount: Int!
+  gpuType: GPUModel!
+  epochs: Int
+  currentEpoch: Int
+  batchSize: Int
+  learningRate: Float
+  checkpoints: [Checkpoint!]!
+  metrics: Metrics
+  startedAt: DateTime
+  completedAt: DateTime
+  cluster: Cluster
+}
+
+"""Generic AI/ML model asset."""
+type Model {
+  id: ID!
+  name: String!
+  version: String!
+  description: String
+  framework: String
+  taskType: String
+  inputFormat: String
+  outputFormat: String
+  sizeGB: Float
+  publishedAt: DateTime
+}
+
+"""NVIDIA or partner AI foundation model."""
+type AIModel {
+  id: ID!
+  name: String!
+  displayName: String
+  version: String!
+  description: String
+  architecture: String
+  parameterCount: String
+  contextLength: Int
+  trainingDataCutoff: String
+  supportedPrecisions: [PrecisionMode!]!
+  isFoundationModel: Boolean!
+  licenseType: String
+  publisher: String
+  tags: [String!]!
+  ngcEntry: NGCRegistry
+  nimAvailable: Boolean!
+  publishedAt: DateTime
+}
+
+"""Large-scale foundation model (LLM, vision, multimodal, etc.)."""
+type FoundationModel {
+  id: ID!
+  name: String!
+  family: String!
+  parameterCount: String
+  architecture: String
+  modality: [String!]!
+  contextWindowTokens: Int
+  trainingFLOPs: String
+  supportedLanguages: [String!]!
+  aiModel: AIModel!
+}
+
+"""Saved model weights snapshot during or after training."""
+type Checkpoint {
+  id: ID!
+  trainingJob: TrainingJob!
+  epoch: Int!
+  step: Int
+  loss: Float
+  accuracy: Float
+  storageUri: String!
+  sizeGB: Float
+  createdAt: DateTime!
+}
+
+"""Versioned artifact of a trained model."""
+type ModelVersion {
+  id: ID!
+  model: AIModel!
+  version: String!
+  changelog: String
+  isLatest: Boolean!
+  isStable: Boolean!
+  publishedAt: DateTime!
+  deprecatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# NGC (NVIDIA GPU Cloud) Types
+# ---------------------------------------------------------------------------
+
+"""Top-level NGC catalog and registry context."""
+type NGC {
+  id: ID!
+  organizations: [NGCOrganization!]!
+  publicCollections: [NGCCollection!]!
+  registry: NGCRegistry!
+}
+
+"""Entry in the NGC model, container, or resource registry."""
+type NGCRegistry {
+  id: ID!
+  name: String!
+  namespace: String!
+  type: String!
+  description: String
+  latestVersion: String
+  tags: [String!]!
+  downloads: Int
+  status: ContainerStatus!
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Docker-compatible container image in NGC."""
+type Container {
+  id: ID!
+  name: String!
+  namespace: String!
+  tag: String!
+  digest: String
+  sizeGB: Float
+  baseImage: String
+  cudaVersion: String
+  framework: String
+  status: ContainerStatus!
+  pullCommand: String
+  publishedAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Specific version of a model or resource in the NGC registry."""
+type NGCTeam {
+  id: ID!
+  name: String!
+  organization: NGCOrganization!
+  members: [Developer!]!
+  createdAt: DateTime!
+}
+
+"""NGC organization (company or personal namespace)."""
+type NGCOrganization {
+  id: ID!
+  name: String!
+  displayName: String
+  teams: [NGCTeam!]!
+  registries: [NGCRegistry!]!
+  createdAt: DateTime!
+}
+
+"""Curated grouping of NGC resources (models, containers, etc.)."""
+type NGCCollection {
+  id: ID!
+  name: String!
+  description: String
+  items: [NGCRegistry!]!
+  tags: [String!]!
+  publishedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# NIM (NVIDIA Inference Microservices) Types
+# ---------------------------------------------------------------------------
+
+"""NIM deployment unit — a packaged, optimized AI model service."""
+type NIM {
+  id: ID!
+  name: String!
+  model: AIModel!
+  version: String!
+  status: NIMStatus!
+  endpoints: [NIMEndpoint!]!
+  config: NIMConfig!
+  deployment: NIMDeployment
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""HTTP/gRPC endpoint exposed by a NIM instance."""
+type NIMEndpoint {
+  id: ID!
+  nim: NIM!
+  url: String!
+  protocol: String!
+  port: Int!
+  healthCheckUrl: String
+  authRequired: Boolean!
+  status: HealthStatus!
+}
+
+"""Response payload from a NIM inference call."""
+type NIMResponse {
+  id: ID!
+  endpoint: NIMEndpoint!
+  statusCode: Int!
+  latencyMs: Float!
+  inputTokens: Int
+  outputTokens: Int
+  body: JSON
+  createdAt: DateTime!
+}
+
+"""Runtime configuration for a NIM instance."""
+type NIMConfig {
+  maxConcurrentRequests: Int
+  maxBatchSize: Int
+  precision: PrecisionMode
+  gpuMemoryFractionReserved: Float
+  environmentVars: JSON
+  customModelPath: String
+}
+
+"""Infrastructure specification for a NIM deployment."""
+type NIMDeployment {
+  id: ID!
+  nim: NIM!
+  instance: Instance!
+  replicaCount: Int!
+  autoScalingEnabled: Boolean!
+  minReplicas: Int
+  maxReplicas: Int
+  deployedAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Cloud Infrastructure Types
+# ---------------------------------------------------------------------------
+
+"""NVIDIA cloud compute service context."""
+type NVIDIAClouds {
+  id: ID!
+  regions: [String!]!
+  instances: [Instance!]!
+  clusters: [Cluster!]!
+}
+
+"""DGX system — NVIDIA's purpose-built AI supercomputer."""
+type DGX {
+  id: ID!
+  model: String!
+  gpuCount: Int!
+  gpuType: GPUModel!
+  totalVRAMTB: Float!
+  nvlinkVersion: String
+  nvSwitchCount: Int
+  cpuSpec: CPUSpec!
+  storageSpec: StorageSpec!
+  networkSpec: Network!
+  tdpKW: Float
+}
+
+"""HGX server platform for data center AI deployments."""
+type HGX {
+  id: ID!
+  model: String!
+  gpuCount: Int!
+  gpuType: GPUModel!
+  totalVRAMTB: Float!
+  nvlinkVersion: String
+  formFactor: String
+  oemPartners: [String!]!
+}
+
+"""MGX modular GPU server reference architecture."""
+type MGX {
+  id: ID!
+  model: String!
+  gpuCount: Int!
+  gpuType: GPUModel!
+  formFactor: String
+  pcieSlotsAvailable: Int
+  oemPartners: [String!]!
+}
+
+"""OVX system optimized for NVIDIA Omniverse workloads."""
+type OVX {
+  id: ID!
+  model: String!
+  gpuCount: Int!
+  gpuType: GPUModel!
+  rtxSupport: Boolean!
+  storageSpec: StorageSpec!
+  networkSpec: Network!
+}
+
+"""Launch configuration template for a cloud GPU instance."""
+type LaunchSpec {
+  id: ID!
+  name: String!
+  gpuType: GPUModel!
+  gpuCount: Int!
+  vcpus: Int!
+  memoryGB: Int!
+  storageGB: Int!
+  networkBandwidthGbps: Float
+  image: String!
+  region: String!
+  pricePerHour: Float
+}
+
+"""Running cloud GPU compute instance."""
+type Instance {
+  id: ID!
+  name: String!
+  launchSpec: LaunchSpec!
+  status: InstanceStatus!
+  publicIP: String
+  privateIP: String
+  region: String!
+  zone: String
+  cluster: Cluster
+  startedAt: DateTime
+  stoppedAt: DateTime
+}
+
+"""Managed cluster of GPU compute nodes."""
+type Cluster {
+  id: ID!
+  name: String!
+  region: String!
+  nodes: [Node!]!
+  totalGPUs: Int!
+  networkFabric: String
+  infiniBandEnabled: Boolean!
+  nvLinkEnabled: Boolean!
+  kubernetesVersion: String
+  createdAt: DateTime!
+}
+
+"""Individual compute node within a cluster."""
+type Node {
+  id: ID!
+  hostname: String!
+  cluster: Cluster!
+  gpus: [GPU!]!
+  cpuSpec: CPUSpec!
+  storageSpec: StorageSpec!
+  networkSpec: Network!
+  status: InstanceStatus!
+}
+
+# ---------------------------------------------------------------------------
+# Networking Types
+# ---------------------------------------------------------------------------
+
+"""Network interface and fabric specification for a node."""
+type Network {
+  id: ID!
+  bandwidthGbps: Float!
+  ports: Int!
+  fabricType: String!
+  infiniBand: InfiniBand
+  nvLink: NVLink
+}
+
+"""InfiniBand high-speed interconnect for GPU clusters."""
+type InfiniBand {
+  generation: String!
+  speedGbps: Float!
+  ports: Int!
+  hcaModel: String
+  rdmaSupported: Boolean!
+}
+
+"""NVLink chip-to-chip interconnect between GPUs."""
+type NVLink {
+  generation: Int!
+  totalBandwidthGBps: Float!
+  linkCount: Int!
+  p2pTransfersEnabled: Boolean!
+}
+
+"""NVSwitch high-bandwidth GPU-to-GPU switching fabric."""
+type NVSwitch {
+  id: ID!
+  generation: Int!
+  portCount: Int!
+  totalBandwidthTBps: Float!
+  latencyNs: Float
+  clusterSupport: Int
+}
+
+# ---------------------------------------------------------------------------
+# CUDA and Library Types
+# ---------------------------------------------------------------------------
+
+"""CUDA parallel computing platform."""
+type CUDA {
+  id: ID!
+  version: CUDAVersion!
+  toolkit: String!
+  supportedGPUs: [GPUModel!]!
+  libraries: [String!]!
+  releaseDate: DateTime
+}
+
+"""Specific CUDA toolkit version."""
+type CUDAVersion {
+  major: Int!
+  minor: Int!
+  patch: Int
+  fullVersion: String!
+  minDriverVersion: String!
+  releaseDate: DateTime
+  endOfSupportDate: DateTime
+}
+
+"""cuBLAS GPU-accelerated linear algebra library."""
+type cuBLAS {
+  id: ID!
+  version: String!
+  cudaVersion: CUDAVersion!
+  supportedPrecisions: [PrecisionMode!]!
+  tensorCoreAccelerated: Boolean!
+  apiDocs: String
+}
+
+"""cuDNN deep neural network acceleration library."""
+type cuDNN {
+  id: ID!
+  version: String!
+  cudaVersion: CUDAVersion!
+  supportedFrameworks: [String!]!
+  supportedPrecisions: [PrecisionMode!]!
+  maxBatchNormLayers: Int
+  apiDocs: String
+}
+
+"""TensorRT high-performance deep learning inference optimizer."""
+type TensorRT {
+  id: ID!
+  version: String!
+  cudaVersion: CUDAVersion!
+  supportedPrecisions: [PrecisionMode!]!
+  dynamicShapesSupported: Boolean!
+  sparsitySupported: Boolean!
+  onnxOpsetVersion: Int
+  maxWorkspaceMB: Int
+  apiDocs: String
+}
+
+# ---------------------------------------------------------------------------
+# Triton Inference Server Types
+# ---------------------------------------------------------------------------
+
+"""NVIDIA Triton Inference Server instance."""
+type Triton {
+  id: ID!
+  version: String!
+  servers: [TritonServer!]!
+  supportedBackends: [String!]!
+}
+
+"""Running Triton Inference Server deployment."""
+type TritonServer {
+  id: ID!
+  triton: Triton!
+  host: String!
+  httpPort: Int!
+  grpcPort: Int!
+  metricsPort: Int!
+  models: [TritonModel!]!
+  gpus: [GPU!]!
+  status: HealthStatus!
+  version: String!
+  startedAt: DateTime
+}
+
+"""Model loaded and served by a Triton server."""
+type TritonModel {
+  id: ID!
+  name: String!
+  server: TritonServer!
+  backend: String!
+  config: ModelConfig!
+  versions: [String!]!
+  readyState: String!
+  inputTensors: [Tensor!]!
+  outputTensors: [Tensor!]!
+}
+
+"""Triton model configuration (config.pbtxt representation)."""
+type ModelConfig {
+  id: ID!
+  modelName: String!
+  backend: String!
+  maxBatchSize: Int!
+  dynamicBatchingEnabled: Boolean!
+  preferredBatchSizes: [Int!]
+  instanceGroupGPUCount: Int!
+  instanceGroupKind: String!
+  inputs: JSON
+  outputs: JSON
+}
+
+"""Deployment profile for optimizing model serving."""
+type DeploymentProfile {
+  id: ID!
+  name: String!
+  gpuType: GPUModel!
+  precision: PrecisionMode!
+  maxBatchSize: Int!
+  targetLatencyMs: Float
+  targetThroughputRPS: Float
+  tensorRTEnabled: Boolean!
+  customConfig: JSON
+}
+
+# ---------------------------------------------------------------------------
+# System Spec Types
+# ---------------------------------------------------------------------------
+
+"""CPU specification for a compute node."""
+type CPUSpec {
+  model: String!
+  vendor: String!
+  coreCount: Int!
+  threadCount: Int!
+  baseClock: Float!
+  boostClock: Float
+  cacheL3MB: Float
+  tdpWatts: Int
+}
+
+"""Storage specification for a compute node."""
+type StorageSpec {
+  totalCapacityTB: Float!
+  type: String!
+  readBandwidthGBps: Float
+  writeBandwidthGBps: Float
+  iops: Int
+  raidLevel: String
+}
+
+# ---------------------------------------------------------------------------
+# Developer Management Types
+# ---------------------------------------------------------------------------
+
+"""NVIDIA developer account."""
+type Developer {
+  id: ID!
+  username: String!
+  email: String!
+  displayName: String
+  organization: NGCOrganization
+  apiKeys: [APIKey!]!
+  tokens: [Token!]!
+  webhooks: [Webhook!]!
+  createdAt: DateTime!
+  lastLoginAt: DateTime
+}
+
+"""API key for authenticating to NVIDIA developer services."""
+type APIKey {
+  id: ID!
+  name: String!
+  keyPrefix: String!
+  developer: Developer!
+  scopes: [String!]!
+  isActive: Boolean!
+  lastUsedAt: DateTime
+  expiresAt: DateTime
+  createdAt: DateTime!
+}
+
+"""Short-lived bearer token for NVIDIA API access."""
+type Token {
+  id: ID!
+  developer: Developer!
+  tokenType: String!
+  scopes: [String!]!
+  issuedAt: DateTime!
+  expiresAt: DateTime!
+  revoked: Boolean!
+}
+
+"""Webhook subscription for NVIDIA platform events."""
+type Webhook {
+  id: ID!
+  developer: Developer!
+  url: String!
+  events: [WebhookEvent!]!
+  secret: String
+  isActive: Boolean!
+  lastDeliveryAt: DateTime
+  createdAt: DateTime!
+}
+
+"""Health check result for an NVIDIA service endpoint."""
+type Health {
+  service: String!
+  status: HealthStatus!
+  latencyMs: Float
+  message: String
+  checkedAt: DateTime!
+}
+
+"""Aggregated metrics for GPU, cluster, or inference workloads."""
+type Metrics {
+  id: ID!
+  entityType: String!
+  entityId: ID!
+  gpuUtilizationPct: Float
+  vramUsedGB: Float
+  throughputRPS: Float
+  avgLatencyMs: Float
+  errorRate: Float
+  powerDrawWatts: Float
+  temperatureCelsius: Float
+  sampledAt: DateTime!
+}
+
+# ---------------------------------------------------------------------------
+# Root Query Type
+# ---------------------------------------------------------------------------
+
+type Query {
+  # GPU Hardware
+  gpu(id: ID!): GPU
+  gpus(architectureFamily: GPUArchitectureFamily, limit: Int, offset: Int): [GPU!]!
+  gpuModel(id: ID!): GPUModel
+  gpuModels(limit: Int, offset: Int): [GPUModel!]!
+  gpuArchitecture(id: ID!): GPUArchitecture
+  gpuArchitectures: [GPUArchitecture!]!
+
+  # AI Models
+  aiModel(id: ID!): AIModel
+  aiModels(taskType: String, publisher: String, limit: Int, offset: Int): [AIModel!]!
+  foundationModel(id: ID!): FoundationModel
+  foundationModels(modality: String, limit: Int, offset: Int): [FoundationModel!]!
+
+  # Training
+  trainingJob(id: ID!): TrainingJob
+  trainingJobs(status: TrainingStatus, limit: Int, offset: Int): [TrainingJob!]!
+  checkpoint(id: ID!): Checkpoint
+  checkpoints(trainingJobId: ID!, limit: Int, offset: Int): [Checkpoint!]!
+
+  # NGC
+  ngcRegistry(id: ID!): NGCRegistry
+  ngcRegistries(type: String, limit: Int, offset: Int): [NGCRegistry!]!
+  container(id: ID!): Container
+  containers(framework: String, cudaVersion: String, limit: Int, offset: Int): [Container!]!
+  ngcOrganization(id: ID!): NGCOrganization
+  ngcCollections(limit: Int, offset: Int): [NGCCollection!]!
+
+  # NIM
+  nim(id: ID!): NIM
+  nims(status: NIMStatus, limit: Int, offset: Int): [NIM!]!
+  nimEndpoint(id: ID!): NIMEndpoint
+  nimResponse(id: ID!): NIMResponse
+
+  # Infrastructure
+  instance(id: ID!): Instance
+  instances(status: InstanceStatus, region: String, limit: Int, offset: Int): [Instance!]!
+  cluster(id: ID!): Cluster
+  clusters(region: String, limit: Int, offset: Int): [Cluster!]!
+  node(id: ID!): Node
+  launchSpecs(gpuType: String, region: String, limit: Int, offset: Int): [LaunchSpec!]!
+
+  # CUDA and Libraries
+  cuda(version: String!): CUDA
+  cudaVersions: [CUDAVersion!]!
+  tensorRT(version: String): TensorRT
+
+  # Triton
+  tritonServer(id: ID!): TritonServer
+  tritonServers(limit: Int, offset: Int): [TritonServer!]!
+  tritonModel(id: ID!): TritonModel
+
+  # Developer
+  developer(id: ID!): Developer
+  me: Developer
+  apiKeys(developerId: ID!): [APIKey!]!
+  webhooks(developerId: ID!): [Webhook!]!
+
+  # Health and Metrics
+  health(service: String!): Health
+  metrics(entityType: String!, entityId: ID!, from: DateTime, to: DateTime): Metrics
+}
+
+# ---------------------------------------------------------------------------
+# Root Mutation Type
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Training Jobs
+  createTrainingJob(
+    name: String!
+    modelId: ID!
+    gpuType: String!
+    gpuCount: Int!
+    epochs: Int
+    batchSize: Int
+    learningRate: Float
+    clusterId: ID
+  ): TrainingJob!
+  cancelTrainingJob(id: ID!): TrainingJob!
+  pauseTrainingJob(id: ID!): TrainingJob!
+  resumeTrainingJob(id: ID!): TrainingJob!
+
+  # NIM
+  deployNIM(modelId: ID!, instanceId: ID!, config: JSON): NIM!
+  stopNIM(id: ID!): NIM!
+  scaleNIM(id: ID!, replicaCount: Int!): NIMDeployment!
+
+  # Instances
+  launchInstance(launchSpecId: ID!, name: String!): Instance!
+  stopInstance(id: ID!): Instance!
+  terminateInstance(id: ID!): Instance!
+
+  # Developer
+  createAPIKey(name: String!, scopes: [String!]!): APIKey!
+  revokeAPIKey(id: ID!): APIKey!
+  createWebhook(url: String!, events: [WebhookEvent!]!, secret: String): Webhook!
+  deleteWebhook(id: ID!): Boolean!
+
+  # Model Publishing
+  publishModelVersion(modelId: ID!, version: String!, changelog: String): ModelVersion!
+  deprecateModelVersion(id: ID!): ModelVersion!
+}
+
+# ---------------------------------------------------------------------------
+# Root Subscription Type
+# ---------------------------------------------------------------------------
+
+type Subscription {
+  trainingJobUpdated(id: ID!): TrainingJob!
+  instanceStatusChanged(id: ID!): Instance!
+  nimStatusChanged(id: ID!): NIM!
+  metricsUpdated(entityType: String!, entityId: ID!): Metrics!
+  healthChanged(service: String!): Health!
+}
