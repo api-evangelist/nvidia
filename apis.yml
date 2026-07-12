@@ -38,6 +38,8 @@ apis:
   - url: graphql/nvidia-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/nvidia-domain-security.yml
 - type: GitHubOrganization
   url: https://github.com/NVIDIA
 - type: LinkedIn
@@ -46,6 +48,8 @@ common:
   url: https://www.nvidia.com
 - type: LlmsText
   url: https://developer.nvidia.com/llms.txt
+- url: https://developer.nvidia.com/blog/feed
+  type: Blog
 maintainers:
 - FN: API Evangelist
   email: info@apievangelist.com
