@@ -22,6 +22,13 @@ access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nvidia.png
 tags:
 - GPU
+- Artificial Intelligence
+- Machine-Learning
+- Computing
+- Graphics
+- Fortune 1000
+tags_raw:
+- GPU
 - AI
 - Machine Learning
 - Computing
@@ -39,6 +46,12 @@ apis:
     and cloud GPU services.
   humanURL: https://developer.nvidia.com/
   tags:
+  - GPU
+  - Artificial Intelligence
+  - Machine-Learning
+  - Computing
+  - Graphics
+  tags_raw:
   - GPU
   - AI
   - Machine Learning
