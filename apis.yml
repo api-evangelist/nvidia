@@ -1,9 +1,8 @@
 aid: nvidia
 name: Nvidia
-description: Nvidia is a Fortune 500 company that provides developer APIs and integration
-  capabilities through its developer platform. NVIDIA provides developer APIs for
-  GPU computing, AI/ML model training and inference, and graphics. The platform includes
-  APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
+description: Nvidia is a Fortune 500 company that provides developer APIs and integration capabilities through its
+  developer platform. NVIDIA provides developer APIs for GPU computing, AI/ML model training and inference, and
+  graphics. The platform includes APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
 kind: contract
 accessModel:
   pricing: freemium
@@ -36,14 +35,13 @@ tags_raw:
 - Fortune 1000
 url: https://raw.githubusercontent.com/api-evangelist/nvidia/refs/heads/main/apis.yml
 created: '2026-03-21'
-modified: '2026-04-28'
+modified: '2026-08-21'
 specificationVersion: '0.23'
 apis:
 - aid: nvidia:nvidia-developer
   name: NVIDIA Developer API
-  description: NVIDIA provides developer APIs for GPU computing, AI/ML model training
-    and inference, and graphics. The platform includes APIs for CUDA, TensorRT, Omniverse,
-    and cloud GPU services.
+  description: NVIDIA provides developer APIs for GPU computing, AI/ML model training and inference, and graphics.
+    The platform includes APIs for CUDA, TensorRT, Omniverse, and cloud GPU services.
   humanURL: https://developer.nvidia.com/
   tags:
   - GPU
@@ -75,6 +73,58 @@ common:
   url: https://developer.nvidia.com/llms.txt
 - url: https://developer.nvidia.com/blog/feed
   type: Blog
+- type: Subsidiary
+  url: https://apis.io/providers/augtera-networks/
+  name: Augtera Networks
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2024
+- type: Subsidiary
+  url: https://apis.io/providers/cumulus-networks/
+  name: Cumulus Networks
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+- type: Subsidiary
+  url: https://apis.io/providers/deci-ai/
+  name: Deci AI
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2024
+- type: Subsidiary
+  url: https://apis.io/providers/deepmap/
+  name: DeepMap
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2021
+- type: Subsidiary
+  url: https://apis.io/providers/excelero-storage/
+  name: Excelero Storage
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2022
+- type: Subsidiary
+  url: https://apis.io/providers/icerasemi/
+  name: icerasemi
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2011
+- type: Subsidiary
+  url: https://apis.io/providers/lepton-ai/
+  name: Lepton AI
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2025
+- type: Subsidiary
+  url: https://apis.io/providers/runai/
+  name: NVIDIA Run:ai
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
+  x-acquired: 2024
+- type: Subsidiary
+  url: https://apis.io/providers/swiftstack/
+  name: SwiftStack
+  x-relationship: acquisition
+  x-generated-by: nvidia-family:2026-08-21
 maintainers:
 - FN: API Evangelist
   email: info@apievangelist.com
