@@ -1,7 +1,9 @@
 ---
 title: NVIDIA Corporation - News - Press Release Details
 url: https://investor.nvidia.com/news/press-release-details/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Nvidia" press release artificial intelligence'
 position: 3
 source: serpapi-google

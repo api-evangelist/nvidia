@@ -1,7 +1,9 @@
 ---
 title: NVIDIA Third-Party Press Release and Blog Guidelines
 url: https://www.nvidia.com/en-us/about-nvidia/pr-guidelines/
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Nvidia" press release artificial intelligence'
 position: 4
 source: serpapi-google

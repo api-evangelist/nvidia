@@ -1,7 +1,9 @@
 ---
 title: NVIDIA and Corning Announce Long-Term Partnership to ...
 url: https://nvidianews.nvidia.com/news/nvidia-and-corning-announce-long-term-partnership-to-strengthen-us-manufacturing-for-ai-infrastructure
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Nvidia" press release artificial intelligence'
 position: 2
 source: serpapi-google
