@@ -33,7 +33,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/nvidia.png
 tags:
 - GPU
 - Artificial Intelligence
-- Machine-Learning
+- Machine Learning
 - Computing
 - Graphics
 - Fortune 1000
@@ -44,6 +44,7 @@ tags_raw:
 - Computing
 - Graphics
 - Fortune 1000
+- Machine-Learning
 url: https://raw.githubusercontent.com/api-evangelist/nvidia/refs/heads/main/apis.yml
 created: '2026-03-21'
 modified: '2026-08-21'
@@ -57,7 +58,7 @@ apis:
   tags:
   - GPU
   - Artificial Intelligence
-  - Machine-Learning
+  - Machine Learning
   - Computing
   - Graphics
   tags_raw:
@@ -66,11 +67,10 @@ apis:
   - Machine Learning
   - Computing
   - Graphics
+  - Machine-Learning
   properties:
   - type: Documentation
     url: https://developer.nvidia.com/
-  - url: graphql/nvidia-graphql.md
-    type: GraphQL
 common:
 - type: DomainSecurity
   url: security/nvidia-domain-security.yml
