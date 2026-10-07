@@ -124,13 +124,10 @@ apis:
 unitEconomics:
   - name: Cost per inference token (hosted)
     metric: build_credits_cost / inference_tokens
-    target: compare against self-hosted break-even
   - name: GPU utilization
     metric: gpu_busy_seconds / gpu_allocated_seconds
-    target: '>= 0.6 on production AI Enterprise clusters'
   - name: Cost per million tokens (self-hosted)
     metric: (ai_enterprise_subscription + power + amortized_hardware) / (inference_tokens / 1000000)
-    target: minimize via Triton dynamic batching
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
