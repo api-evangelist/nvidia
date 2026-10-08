@@ -72,6 +72,12 @@ apis:
   - type: Documentation
     url: https://developer.nvidia.com/
 common:
+- type: Plans
+  url: plans/nvidia-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/nvidia-rate-limits.yml
+- type: FinOps
+  url: finops/nvidia-finops.yml
 - type: DomainSecurity
   url: security/nvidia-domain-security.yml
 - type: GitHubOrganization
