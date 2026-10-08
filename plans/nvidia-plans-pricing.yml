@@ -150,3 +150,59 @@ plans:
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - hybrid
+  - metered
+  - subscription
+  units:
+  - compute
+  - credit
+  - negotiated
+  - object
+  plans:
+  - name: build.nvidia.com Free Credits
+    access: freemium
+    model: free
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - per-use
+  - name: NGC Catalog (Development)
+    access: freemium
+    model: metered
+    model_how: derived
+    units:
+    - object
+    periods:
+    - per-use
+  - name: NVIDIA AI Enterprise — 90-Day Trial
+    access: freemium
+    model: subscription
+    model_how: derived
+    units:
+    - negotiated
+    periods:
+    - per-use
+  - name: NVIDIA AI Enterprise
+    access: enterprise
+    model: hybrid
+    model_how: derived
+    units:
+    - compute
+    - other
+    periods:
+    - per-use
+    - year
+  - name: DGX Cloud / DGX Cloud Lepton
+    access: other
+    model: metered
+    model_how: stated
+    units:
+    - compute
+    periods:
+    - per-use
