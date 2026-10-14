@@ -39,6 +39,37 @@ edges:
   - Verified domain
   detected_by: sweep-devtools.py
   detected: '2026-10-14'
+- partner_name: MCP Registry
+  partner: mcp
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://registry.modelcontextprotocol.io/v0/servers?search=com.nvidia.ngc.nsight.copilot.api
+  contract_reference:
+    register: registry.modelcontextprotocol.io
+    spec_file: null
+    role: mcp-server-listing
+    registered_name: com.nvidia.ngc.nsight.copilot.api/cuda-docs
+    register_id: com.nvidia.ngc.nsight.copilot.api/cuda-docs
+    detected_by: sweep-agent-tools.py
+    detected: '2026-10-14'
+  mcp_registry:
+    servers:
+    - com.nvidia.ngc.nsight.copilot.api/cuda-docs
+    hosted_remote: 1
+    local_package: 0
+    transports:
+      streamable-http: 1
+    auth_declared: 0
+    catalog_declared: false
+    namespace_domains:
+    - nvidia.com
+  matched_by:
+  - namespace-domain+label
+  detected_by: sweep-agent-tools.py
+  first_seen: '2026-10-14'
 - partner_name: CrowdStrike (own)
   partner: crowdstrike
   partner_match: mirror
@@ -61,6 +92,7 @@ checked:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
 - https://marketplace.visualstudio.com/vscode
 - https://openrouter.ai/api/v1/models
+- https://registry.modelcontextprotocol.io/v0/servers
 marketplace_apps: []
 source:
 - https://marketplace.visualstudio.com/vscode
