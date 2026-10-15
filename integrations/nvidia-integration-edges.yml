@@ -86,10 +86,34 @@ edges:
   listing_count: 1
   detected: '2026-10-14'
   detected_by: mirror-platform-listings.py
+- partner_name: Hugging Face Hub
+  partner: hugging-face
+  partner_match: framework
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://huggingface.co/nvidia
+  coverage_role:
+  - stt
+  - tts
+  framework_signals:
+    packages:
+    - huggingface.co/nvidia
+    roles:
+    - stt
+    - tts
+    vendor_domain: nvidia.com
+    hub_org_models_in_top_1000: 35
+    hub_org_downloads: 2920841
+  matched_by: verified-domain-table
+  detected_by: sweep-voice-ai.py
+  first_seen: '2026-10-15'
 generated: '2026-10-13'
 method: searched
 checked:
 - crowdstrike/integrations/crowdstrike-integration-edges.yml
+- https://huggingface.co/models?pipeline_tag=text-to-speech
 - https://marketplace.visualstudio.com/vscode
 - https://openrouter.ai/api/v1/models
 - https://registry.modelcontextprotocol.io/v0/servers

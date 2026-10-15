@@ -57,3 +57,14 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: nvidia-hugging-face-hub
+  label: Hugging Face Hub
+  partner: hugging-face
+  partner_name: Hugging Face Hub
+  type: coverage
+  channel: partner-built
+  evidence: https://huggingface.co/nvidia
+  source: edge
+  relationship: system-coverage
+  status: not-a-workflow
+  arazzo: null
