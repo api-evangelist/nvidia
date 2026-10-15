@@ -45,18 +45,6 @@
     detected: '2026-10-14'
   status: not-a-workflow
   arazzo: null
-- slug: nvidia-crowdstrike-own
-  label: CrowdStrike (own)
-  partner: crowdstrike
-  partner_name: CrowdStrike (own)
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://marketplace.crowdstrike.com/listings/nvidia-ai-enterprise/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: nvidia-hugging-face-hub
   label: Hugging Face Hub
   partner: hugging-face
@@ -103,5 +91,17 @@
     signal_note: 'participation only: packages/distros are context, never read'
     detected_by: sweep-industrial-robotics.py
     detected: '2026-10-15'
+  status: not-a-workflow
+  arazzo: null
+- slug: nvidia-crowdstrike-own
+  label: CrowdStrike (own)
+  partner: crowdstrike
+  partner_name: CrowdStrike (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://marketplace.crowdstrike.com/listings/nvidia-ai-enterprise/
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

@@ -1,24 +1,4 @@
 edges:
-- partner_name: OpenRouter
-  partner: openrouter
-  partner_match: router
-  channel: partner-built
-  direction: partner-built
-  type: coverage
-  relationship: system-coverage
-  evidence: https://openrouter.ai/api/v1/models
-  coverage_role:
-  - model-maker
-  router_signals:
-    model-maker:
-      models: 11
-      router_ids:
-      - nvidia
-      tools_share: 0.73
-      structured_output_share: 0.45
-  matched_by: verified-token-table
-  detected_by: sweep-model-routing.py
-  first_seen: '2026-10-13'
 - partner_name: Visual Studio Code Marketplace
   partner: vs-code-marketplace
   partner_match: aggregator
@@ -70,22 +50,6 @@ edges:
   - namespace-domain+label
   detected_by: sweep-agent-tools.py
   first_seen: '2026-10-14'
-- partner_name: CrowdStrike (own)
-  partner: crowdstrike
-  partner_match: mirror
-  mirror_match: domain+name-among-holders
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://marketplace.crowdstrike.com/listings/nvidia-ai-enterprise/
-  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
-  apps:
-  - NVIDIA AI Enterprise
-  listing_count: 1
-  detected: '2026-10-14'
-  detected_by: mirror-platform-listings.py
 - partner_name: Hugging Face Hub
   partner: hugging-face
   partner_match: framework
@@ -146,6 +110,42 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-industrial-robotics.py
   first_seen: '2026-10-15'
+- partner_name: CrowdStrike (own)
+  partner: crowdstrike
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://marketplace.crowdstrike.com/listings/nvidia-ai-enterprise/
+  mirror_of: crowdstrike/integrations/crowdstrike-integration-edges.yml
+  apps:
+  - NVIDIA AI Enterprise
+  listing_count: 1
+  detected: '2026-10-14'
+  detected_by: mirror-platform-listings.py
+- partner_name: OpenRouter
+  partner: openrouter
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://openrouter.ai/api/v1/models
+  coverage_role:
+  - model-maker
+  router_signals:
+    model-maker:
+      models: 11
+      router_ids:
+      - nvidia
+      tools_share: 0.73
+      structured_output_share: 0.45
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
 generated: '2026-10-13'
 method: searched
 checked:
