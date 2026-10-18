@@ -71,7 +71,37 @@ apis:
   properties:
   - type: Documentation
     url: https://developer.nvidia.com/
+
+- aid: nvidia:nvidia-doca-sdk
+
+  name: NVIDIA DOCA SDK
+
+  description: 'NVIDIA DOCA is the SDK for programming BlueField DPUs and SuperNICs: C libraries and services for networking, storage, security
+
+    and RDMA offload. It is a native SDK, not an HTTP API.'
+
+  humanURL: https://docs.nvidia.com/doca/sdk/
+
+  tags:
+
+  - DPU
+
+  - SDK
+
+  - Networking
+
+  properties:
+
+  - type: Documentation
+
+    url: https://docs.nvidia.com/doca/sdk/
+
+  - type: AgentSkill
+
+    url: https://github.com/NVIDIA/skills
 common:
+- type: AgentSkill
+  url: https://github.com/NVIDIA/skills
 - type: Plans
   url: plans/nvidia-plans-pricing.yml
 - type: RateLimits

@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-firefly/SKILL.md",
+ "status": 200,
+ "bytes": 18371,
+ "sha256": "9ffe932a5e269c5b739b14c730cc2aede6aec1e242d1d0068e9ac8d3ff5330bb",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

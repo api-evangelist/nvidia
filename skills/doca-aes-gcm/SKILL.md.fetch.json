@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-aes-gcm/SKILL.md",
+ "status": 200,
+ "bytes": 16788,
+ "sha256": "f50f4f9d87c6678d1a0f9e8c39d8c3c81233fd7d1fd50a3e501a6ebd2ebb6313",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

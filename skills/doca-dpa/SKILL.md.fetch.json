@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-dpa/SKILL.md",
+ "status": 200,
+ "bytes": 16695,
+ "sha256": "542c35ded9a38267fd88145ce0930f886fc08b1fe4ea2ba316e2938b5ab61d57",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

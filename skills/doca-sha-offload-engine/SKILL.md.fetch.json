@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-sha-offload-engine/SKILL.md",
+ "status": 200,
+ "bytes": 14516,
+ "sha256": "d5547f902995a3e01f7894074a24a5fb8e87d4bf3a4915ec844f8aee36c524ab",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-flow-grpc-server/SKILL.md",
+ "status": 200,
+ "bytes": 17272,
+ "sha256": "11eee851d2fb8a0b5b359f6de301a6188d9b884fc44374709aacc48b3da8d756",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

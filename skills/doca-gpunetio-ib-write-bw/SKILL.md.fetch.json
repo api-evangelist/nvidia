@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-gpunetio-ib-write-bw/SKILL.md",
+ "status": 200,
+ "bytes": 16908,
+ "sha256": "2b0a82fe7647e1d939147e5dff5b8b712696bf6b1df57b140f4dab4111a225b7",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

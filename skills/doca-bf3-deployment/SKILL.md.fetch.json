@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-bf3-deployment/SKILL.md",
+ "status": 200,
+ "bytes": 11216,
+ "sha256": "0b0b9702973d582e01f60f4168142fc6cf497f5ce1ea9863b119041dfd13d2c3",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

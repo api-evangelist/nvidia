@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-flow-dpa-provider/SKILL.md",
+ "status": 200,
+ "bytes": 17590,
+ "sha256": "027c94fa9c68e9dc5339fd643d1704fdb2437ac896153b394a9fb6bb2b80dd31",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

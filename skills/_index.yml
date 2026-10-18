@@ -1,0 +1,428 @@
+generated: '2026-10-18'
+method: published
+publisher: NVIDIA
+source: https://github.com/NVIDIA/skills
+license: Apache-2.0
+note: NVIDIA's own DOCA agent skills, saved verbatim (byte-identical, .fetch.json per file). The repo holds 418 skills across NVIDIA products;
+  DOCA's 60 are harvested here (roadmap#970).
+skills:
+- file: skills/doca-aes-gcm/SKILL.md
+  name: doca-aes-gcm
+  description: 'Use this skill when the user is doing hands-on DOCA AES-GCM work on a BlueField DPU or ConnectX NIC — configuring `doca_aes_gcm_task_encrypt`
+    / `_task_decrypt`, querying `doca_aes_gcm_cap_*` for per-key-type (only `DOCA_AES_GCM_KEY_128` / `_256` — AES-192 not supported) and per-task
+    support, sizing '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-aes-gcm
+  method: published
+- file: skills/doca-argp/SKILL.md
+  name: doca-argp
+  description: Use this skill for hands-on DOCA Arg Parser CLI work on a shipped sample or new DOCA-using app — adding / removing / renaming flags;
+    wiring `doca_argp_init` → register params → `doca_argp_start` → `doca_argp_destroy` in order; picking a parameter type from the full public
+    enum (`DOCA_ARGP_TYPE_STRIN
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-argp
+  method: published
+- file: skills/doca-argus/SKILL.md
+  name: doca-argus
+  description: 'Use this skill when the user is deploying or operating the DOCA Argus Service — the packaged BlueField-side runtime-security container
+    that watches the BlueField and attached host for suspicious activity, integrity violations, and operational anomalies, and forwards findings
+    to a SIEM (Splunk / ELK '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-argus
+  method: published
+- file: skills/doca-bare-metal-deployment/SKILL.md
+  name: doca-bare-metal-deployment
+  description: 'Running a DOCA-linked binary directly on the hardware, with no container or kubelet: on host x86 with a BlueField NIC over PCIe,
+    or bare-metal on BlueField Arm. Use for launching and supervising it (direct, tmux, systemd), and when it "exits 1 right after launch", "systemd
+    keeps restarting it", repo'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-bare-metal-deployment
+  method: published
+- file: skills/doca-bench-extension/SKILL.md
+  name: doca-bench-extension
+  description: 'Use this skill when the operator is authoring, building, loading, or debugging a custom doca-bench plug-in — a versioned shared
+    library with DOCA_EXPERIMENTAL-marked C entry points that doca-bench loads to measure a workload class its built-in modes do not cover, with
+    doca_bench_cuda as the shipped '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-bench-extension
+  method: published
+- file: skills/doca-bench/SKILL.md
+  name: doca-bench
+  description: Run `doca_bench` (DOCA 2.7.0 or newer) to measure throughput, bulk latency, precision latency, or maximum bandwidth for RDMA, Compress,
+    AES-GCM, SHA, DMA, EC, Ethernet, Comch, or GPUNetIO on a host or BlueField Arm. Use it to discover enabled benchmark libraries, capture a
+    reproducible command/versi
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-bench
+  method: published
+- file: skills/doca-bf3-deployment/SKILL.md
+  name: doca-bf3-deployment
+  description: 'Use this skill for BlueField-3 (BF3) day-1 platform bring-up via the classic RShim/BFB path: pushing a BlueField bundle (BFB)
+    to the DPU over RShim with bfb-install from the host, the host-to-DPU TMFIFO management channel (tmfifo_net0, the 192.168.100.x convention),
+    RShim daemon state and console-ov'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-bf3-deployment
+  method: published
+- file: skills/doca-bf4-deployment/SKILL.md
+  name: doca-bf4-deployment
+  description: 'WARNING: guides IRREVERSIBLE BlueField-4 hardware operations (PLDM firmware burns, ISO reflashes, power cycles, BMC factory resets);
+    every mutating step is governed by doca-hardware-safety (window, rollback). BlueField-4 only: BlueField-3 bring-up is doca-bf3-deployment.
+    Use this skill for BlueField'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-bf4-deployment
+  method: published
+- file: skills/doca-caps/SKILL.md
+  name: doca-caps
+  description: Use this skill when the user wants to invoke the read-only doca_caps CLI to ask what DOCA sees on this host — listing DOCA devices
+    and PCIe addresses, listing representor devices, asking which DOCA libraries are available on the current OS, checking per-device per-library
+    capabilities, scoping outpu
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-caps
+  method: published
+- file: skills/doca-collectx-deployment/SKILL.md
+  name: doca-collectx-deployment
+  description: Use this skill to deploy and operate a CollectX (clx) based DOCA telemetry collector on a host or BlueField — wiring providers
+    / counters into the collector, running the collection daemon, and shaping its exporters (Prometheus pull, Fluent Bit push, NetFlow, file /
+    IPC) so the metrics actually leave
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-collectx-deployment
+  method: published
+- file: skills/doca-comch/SKILL.md
+  name: doca-comch
+  description: Use this skill when the user is doing hands-on DOCA Comch work on a host + BlueField pair — bringing up host ↔ DPU PCIe control-plane
+    messaging, picking server (DPU) vs client (host) roles, choosing slow-path send-task / recv-callback vs fast-path producer / consumer, querying
+    max-msg-size or max-cl
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-comch
+  method: published
+- file: skills/doca-comm-channel-admin/SKILL.md
+  name: doca-comm-channel-admin
+  description: Use this skill to enumerate host↔DPU DOCA comch (formerly Comm Channel) servers and connections via the shipped doca_comm_channel_admin
+    binary — listing comch-capable devices and decoding the per-device server / connection table (server name, PID, in-use / max, PCIe address).
+    The shipped binary is a
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-comm-channel-admin
+  method: published
+- file: skills/doca-common/SKILL.md
+  name: doca-common
+  description: Use this skill whenever the user is doing hands-on DOCA programming on a BlueField DPU or ConnectX NIC and needs the foundation
+    primitives every per-library context rests on — walking the doca_ctx lifecycle, discovering doca_dev / doca_devinfo and gating on doca_*_cap_*
+    before trusting a feature, wi
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-common
+  method: published
+- file: skills/doca-compress/SKILL.md
+  name: doca-compress
+  description: 'Hardware compression offload with DOCA Compress on a BlueField DPU, ConnectX NIC, or host: DEFLATE compress and decompress, plus
+    LZ4 decompress (stream and block; LZ4 encode is NOT supported), instead of CPU zlib / zstd. Trigger on "offload this gzip", "decompress incoming
+    network data on the NIC", '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-compress
+  method: published
+- file: skills/doca-container-deployment/SKILL.md
+  name: doca-container-deployment
+  description: 'Running an in-bundle DOCA service as a container on a BlueField (Argus, DMS, Firefly, or UROM service): kubelet standalone watching
+    a static-pod manifests directory, YAML pod-spec drop, kubelet status / ENTRYPOINT logs / per-service liveness. Trigger on "how do I run my
+    built service on the BlueFiel'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-container-deployment
+  method: published
+- file: skills/doca-debug/SKILL.md
+  name: doca-debug
+  description: 'Use this skill when the user is debugging any DOCA symptom — a build that won''t compile, a link step that can''t resolve a doca_*
+    symbol, a runtime call returning DOCA_ERROR_*, a silent service or tool, or a stack trace / valgrind / core dump — and needs the layered ladder
+    (install → version → build '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-debug
+  method: published
+- file: skills/doca-devemu/SKILL.md
+  name: doca-devemu
+  description: Use this skill when the user is doing hands-on DOCA Device Emulation on a BlueField DPU — exposing a custom emulated PCIe device
+    the host sees as a real peripheral while DPU-side code runs the backend, picking the sub-library (PCI Generic, virtio-net, virtio-fs), wiring
+    the per-sub-library Core cont
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-devemu
+  method: published
+- file: skills/doca-dma/SKILL.md
+  name: doca-dma
+  description: Use this skill when the user is doing hands-on DOCA DMA programming — bringing up a doca_dma context, configuring the single doca_dma_task_memcpy
+    task type, sizing buffers via the doca_dma_cap_task_memcpy_* queries, setting LOCAL_READ_ONLY / LOCAL_READ_WRITE permissions on source / destination
+    doca_
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-dma
+  method: published
+- file: skills/doca-dms/SKILL.md
+  name: doca-dms
+  description: 'Operate NVIDIA DOCA Management Service on a BlueField, Arm/x86 host, or Kubernetes pod: from DOCA 3.5 the local `dms-cli` (one
+    command per YANG path, no server), and the `dmsd` + `dmspe` service: choose deployment and authentication, configure `-allowed_users` and
+    `dmsgroup`, use gNMI Get/Set/Subscr'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-dms
+  method: published
+- file: skills/doca-dpa-hl-tracer/SKILL.md
+  name: doca-dpa-hl-tracer
+  description: Use this skill when the user runs doca_dpa_hl_tracer to capture/decode DPA-side traces at the programming-events layer (kernel
+    entry/exit, sync points, comm primitive calls, RDMA WR submission, completion drain) — picking TRACE vs CRIT, tuning the JSON config (file-size
+    limits + file_size_limit_poli
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-dpa-hl-tracer
+  method: published
+- file: skills/doca-dpa/SKILL.md
+  name: doca-dpa
+  description: Use this skill when the user is doing hands-on DOCA DPA host-side work on a BlueField — creating the `doca_dpa` Core context, loading
+    a DPACC-compiled DPA app image (`doca_dpa_app`), creating DPA threads, launching kernels via `doca_dpa_kernel_launch_update_*`, draining `doca_dpa_completion`,
+    runnin
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-dpa
+  method: published
+- file: skills/doca-dpdk-bridge/SKILL.md
+  name: doca-dpdk-bridge
+  description: 'Use this skill when the user has an existing DPDK application and is adding DOCA capabilities in-place — most commonly DOCA Flow
+    hardware steering — without rewriting the data-plane in DOCA-native form: binding a DPDK port id to a `doca_dev` (`doca_dpdk_port_probe` /
+    `doca_dpdk_port_as_dev`), conver'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-dpdk-bridge
+  method: published
+- file: skills/doca-erasure-coding/SKILL.md
+  name: doca-erasure-coding
+  description: 'Hardware-offloaded erasure coding with DOCA Erasure Coding (Reed-Solomon, doca_ec) on a BlueField DPU, ConnectX NIC, or host:
+    generating parity for data blocks, rebuilding lost blocks from the survivors, and refreshing parity after a change. Trigger on "one data block
+    changed, how do I refresh parit'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-erasure-coding
+  method: published
+- file: skills/doca-eth/SKILL.md
+  name: doca-eth
+  description: Use this skill for hands-on DOCA Ethernet packet-queue work on a BlueField DPU or ConnectX NIC — bringing up a `doca_eth_rxq` or
+    `doca_eth_txq` on a port / representor / SF, picking among the four `enum doca_eth_rxq_type` values (`_REGULAR` / `_CYCLIC` / `_MANAGED_MEMPOOL`
+    / `_SHARED_MEMPOOL`), sizi
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-eth
+  method: published
+- file: skills/doca-firefly/SKILL.md
+  name: doca-firefly
+  description: 'Use this skill when the user is operating the DOCA Firefly Service container on BlueField — picking the four PTP configuration
+    axes (role / profile / domain / interface), wiring the BlueField PHC + host follower + consumer workload pairing, deciding whether PTP-grade
+    time is even needed (vs. chrony '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-firefly
+  method: published
+- file: skills/doca-flow-dpa-perf/SKILL.md
+  name: doca-flow-dpa-perf
+  description: Use this skill when the user is invoking doca_flow_dpa_perf on DPA-capable hardware (ConnectX-7 minimum supported, ConnectX-8 recommended,
+    or BlueField-3) to measure rule update / disable rates on the DPA-offloaded DOCA Flow path — picking the active / passive device split, choosing
+    workload-shape a
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow-dpa-perf
+  method: published
+- file: skills/doca-flow-dpa-provider/SKILL.md
+  name: doca-flow-dpa-provider
+  description: Use this skill when the user is doing hands-on DOCA Flow DPA Provider work — exporting a `doca-flow` pipe or external resource
+    (index-selector/memory) into BlueField DPA address space so a DPACC-built kernel can read counters, mutate hash-pipe entries, and update/read
+    memory or index-selector resour
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow-dpa-provider
+  method: published
+- file: skills/doca-flow-grpc-server/SKILL.md
+  name: doca-flow-grpc-server
+  description: 'Remote control of DOCA Flow over gRPC with the shipped `doca_flow_grpc` server: program Flow pipes and entries from Python, Go,
+    Rust or Java, or from another host, instead of linking `libdoca_flow.so`. PLAINTEXT-ONLY: the server uses `grpc::InsecureServerCredentials()`
+    with NO TLS / mTLS / token-aut'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow-grpc-server
+  method: published
+- file: skills/doca-flow-perf/SKILL.md
+  name: doca-flow-perf
+  description: Use this skill when the user is measuring the host or DPU-CPU control-plane rate of a DOCA Flow pipeline with doca_flow_perf —
+    picking a JSON policy from configs/, choosing the DPDK or DOCA backend, running the single-iteration smoke then the iterative eval loop, interpreting
+    per-iteration CPU cycle
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow-perf
+  method: published
+- file: skills/doca-flow-tune/SKILL.md
+  name: doca-flow-tune
+  description: Use this skill when the user is tuning a live or captured `doca-flow` pipeline with `doca_flow_tune` — snapshotting pipe / counter
+    / KPI state, picking a tuning axis (rule placement, resource hints / table sizing, HW-offload mode) and a matching measurement (rule-install
+    rate, lookup latency, hardwa
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow-tune
+  method: published
+- file: skills/doca-flow/SKILL.md
+  name: doca-flow
+  description: 'DOCA Flow packet steering on NVIDIA NICs/DPUs, linked into a C application: match/action pipes, ports, representors, forwarding,
+    hairpin, counters. Trigger on packet steering, classifier, rule-matching, representor, hairpin or 5-tuple-to-queue questions even when "DOCA
+    Flow" is not named. Remote or '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-flow
+  method: published
+- file: skills/doca-gpi/SKILL.md
+  name: doca-gpi
+  description: Use this skill for hands-on DOCA GPI programming — wiring a GPU-Packet-Initiator context so a CUDA kernel drives RDMA queues directly
+    from GPU memory without host CPU mediation. Covers picking GPI vs doca-gpunetio, the doca_gpi / domain / channel object model, the GPU-side
+    handle handoff (doca_gpu_g
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-gpi
+  method: published
+- file: skills/doca-gpunetio-ib-write-bw/SKILL.md
+  name: doca-gpunetio-ib-write-bw
+  description: Use this skill when the user is building, running, or interpreting the doca/tools/gpunetio_ib_write_bw client+server benchmark
+    — a CUDA kernel on the client posts RDMA WRITE work requests through the doca-gpunetio device-side surface to measure sustained GPU-driven
+    WRITE bandwidth on a GPU+IB-device
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-gpunetio-ib-write-bw
+  method: published
+- file: skills/doca-gpunetio-ib-write-lat/SKILL.md
+  name: doca-gpunetio-ib-write-lat
+  description: Use this skill when the user is measuring GPU-kernel-initiated RDMA WRITE latency through doca-gpunetio — building and running
+    the `gpunetio_ib_write_lat` client + server pair under `doca/tools/gpunetio_ib_write_lat/`, checking GPU-NIC pairing, reading the half-iter
+    / full-iter / CUDA-side usec colu
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-gpunetio-ib-write-lat
+  method: published
+- file: skills/doca-gpunetio/SKILL.md
+  name: doca-gpunetio
+  description: Use this skill when the user is doing hands-on DOCA GPUNetIO programming — wiring a CUDA kernel on an NVIDIA GPU to a doca-eth
+    queue via doca_gpu_eth_rxq / doca_gpu_eth_txq, standing up the per-CUDA-device doca_gpu context, designing the persistent CUDA kernel that
+    drains the GPU-visible queue, runn
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-gpunetio
+  method: published
+- file: skills/doca-hardware-safety/SKILL.md
+  name: doca-hardware-safety
+  description: Use this skill whenever the agent is about to recommend or apply a change that touches DPU / NIC hardware state on a live system
+    — mlxconfig firmware-parameter write, NIC firmware burn, BFB reflash, NIC ↔ DPU mode flip, SR-IOV or device-emulation slot enable, kernel
+    boot-parameter change (IOMMU, hug
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-hardware-safety
+  method: published
+- file: skills/doca-mgmt/SKILL.md
+  name: doca-mgmt
+  description: 'Use this skill when the user is doing hands-on DOCA Management programming against BlueField / ConnectX devices — standing up
+    a management or representor context (doca_mgmt_dev_ctx / doca_mgmt_dev_rep_ctx), querying device caps (data-direct, caps-general), toggling
+    congestion-control global status, '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-mgmt
+  method: published
+- file: skills/doca-pcc-counters/SKILL.md
+  name: doca-pcc-counters
+  description: 'Use this skill when the user is invoking the DOCA PCC Counters tool — the `pcc_counters.sh` bash script under the DOCA tools directory
+    — to arm and read the fixed firmware/hardware PCC (Programmable Congestion Control) diagnostic counters (CNP, RTT, WRED-drop, etc.) on a ConnectX
+    / BlueField device '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-pcc-counters
+  method: published
+- file: skills/doca-pcc-ztr-rttcc-algo/SKILL.md
+  name: doca-pcc-ztr-rttcc-algo
+  description: 'DOCA-shipped Zero-Touch RoCE RTT congestion control (ZTR RTTCC) reference algorithm on a BlueField-3 DPA: deploy, tune and evaluate
+    doca_pcc_dev_ztr_rttcc_algo through the shipped DOCA PCC sample. Trigger on "my RoCE-v2 flows aren''t being throttled", "PCC sample isn''t
+    dispatching to my algo", "set-p'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-pcc-ztr-rttcc-algo
+  method: published
+- file: skills/doca-pcc/SKILL.md
+  name: doca-pcc
+  description: 'Use this skill when the user is doing hands-on host-side DOCA PCC work to load a CUSTOM Programmable Congestion Control algorithm
+    onto a BlueField DPU — creating per-port `doca_pcc` contexts, loading a `dpacc`-compiled `doca_pcc_app` onto the `doca_dev` for the RoCE-bearing
+    port, parameterizing it, '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-pcc
+  method: published
+- file: skills/doca-programming-guide/SKILL.md
+  name: doca-programming-guide
+  description: 'Use this skill when the user is writing their first DOCA app or asking a library-agnostic programming question — picking a shipped
+    sample to copy and modify, wiring pkg-config + meson (or FFI from Rust / Go / Python against the public C ABI), walking the Core lifecycle
+    (create → configure → start → '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-programming-guide
+  method: published
+- file: skills/doca-public-knowledge-map/SKILL.md
+  name: doca-public-knowledge-map
+  description: 'Use this skill to locate authoritative NVIDIA DOCA information without the source tree: the docs.nvidia.com page for a library/service/tool,
+    which DOCA libraries are installed and at what version, a sample on disk or GitHub, a path under /opt/mellanox/doca, or a 404''d/renamed doc
+    URL. Activate on im'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-public-knowledge-map
+  method: published
+- file: skills/doca-rdma/SKILL.md
+  name: doca-rdma
+  description: RDMA data movement on NVIDIA BlueField/ConnectX NICs (RoCE/InfiniBand) with DOCA RDMA, instead of hand-written libibverbs/rdma_cm.
+    Use when the user moves data between processes or hosts over the NIC, or hits "one-sided read returns permission denied", "completions never
+    arrive after submit", "conne
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-rdma
+  method: published
+- file: skills/doca-rdmi/SKILL.md
+  name: doca-rdmi
+  description: Use this skill when the user is doing hands-on DOCA RDMI (RDMA Initiator) programming — picking doca-rdmi vs doca-rdma for an accelerator-initiated
+    one-sided RDMA flow, standing up a doca_rdmi_connection or doca_rdmi_poster, attaching a doca_dpa_completion or doca_verbs_cq before doca_ctx_start(),
+    r
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-rdmi
+  method: published
+- file: skills/doca-rmax/SKILL.md
+  name: doca-rmax
+  description: DOCA Rivermax (doca_rmax) receive streams for timing-precise media over IP (SMPTE ST 2110 video / audio, market data, scientific
+    feeds) on a BlueField DPU or ConnectX host, once the Rivermax SDK and its license are installed; getting the SDK or license is doca-setup
+    / doca-public-knowledge-map terri
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-rmax
+  method: published
+- file: skills/doca-setup/SKILL.md
+  name: doca-setup
+  description: Use this skill when the user is dealing with the DOCA environment around their workload — verifying an install is healthy, preparing
+    the build env (pkg-config, headers, LD_LIBRARY_PATH, hugepages, devlink, representors), debugging env-class failures, deciding container-vs-bare-metal
+    deployment shape
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-setup
+  method: published
+- file: skills/doca-sha-offload-engine/SKILL.md
+  name: doca-sha-offload-engine
+  description: Use this skill when wiring the DOCA SHA Offload Engine (an OpenSSL ENGINE) into an existing OpenSSL pipeline to offload one-shot
+    SHA-1, SHA-256, or SHA-512 (EVP_Digest) onto DOCA SHA hardware without rewriting against doca-sha. Covers engine load mechanics (`openssl
+    engine dynamic`, `set_pci_addr` c
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-sha-offload-engine
+  method: published
+- file: skills/doca-sha/SKILL.md
+  name: doca-sha
+  description: Use this skill when the user is doing hands-on DOCA SHA programming — offloading SHA-1, SHA-256, or SHA-512 hashing onto a BlueField
+    DPU or ConnectX accelerator, picking between one-shot `doca_sha_task_hash` and incremental `doca_sha_task_partial_hash`, querying `doca_sha_cap_*`
+    for algorithm suppor
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-sha
+  method: published
+- file: skills/doca-socket-relay/SKILL.md
+  name: doca-socket-relay
+  description: Use this skill when the operator is driving the DOCA Socket Relay to bridge a socket-oriented host application onto a BlueField
+    DPU peer without rewriting it — picking the deployment shape (in-process, sidecar, or BlueField service container), configuring the host-side
+    socket and the DPU-side forwar
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-socket-relay
+  method: published
+- file: skills/doca-spcx-cc/SKILL.md
+  name: doca-spcx-cc
+  description: 'Use this skill when the user is invoking `doca_spcx_cc` (the host-side CLI under /opt/mellanox/doca/tools/) to load, parameterize,
+    start, observe, or stop a Programmable Congestion Control (SPCX) algorithm on a BlueField with a DPA processor against a live RDMA / RoCE
+    fabric, or picking SPCX vs the '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-spcx-cc
+  method: published
+- file: skills/doca-sta/SKILL.md
+  name: doca-sta
+  description: Use this skill when the user is doing hands-on NVMe-over-Fabrics storage-target work on a BlueField DPU or ConnectX NIC with DOCA
+    STA — standing up a doca_sta DOCA Core context that accelerates the target-side NVMe-oF data path over RDMA, defining doca_sta_subsystem targets
+    (NQN + namespaces) backed
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-sta
+  method: published
+- file: skills/doca-structured-tools-contract/SKILL.md
+  name: doca-structured-tools-contract
+  description: Not for writing library code (name that library skill). Use this skill whenever another DOCA skill says "prefer the structured
+    tool per doca-structured-tools-contract", or when the user wants a one-shot answer that consolidates info multiple manual commands would produce
+    — DOCA env / version / devic
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-structured-tools-contract
+  method: published
+- file: skills/doca-telemetry-exporter/SKILL.md
+  name: doca-telemetry-exporter
+  description: Use this skill when the user is doing hands-on DOCA Telemetry Exporter programming on a host where DOCA is installed — defining
+    a doca_telemetry_exporter_schema and event types, creating sources, picking a publish surface (typed events / opaque events / the metrics
+    counter-gauge-histogram API / OTLP
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-telemetry-exporter
+  method: published
+- file: skills/doca-telemetry-utils/SKILL.md
+  name: doca-telemetry-utils
+  description: 'doca_telemetry_utils command line on a host with DOCA: discover the diagnostic-counter schema, translate counter names to binary
+    Data IDs and back, and check per-device counter support before committing a DOCA Telemetry exporter config. Start here when telemetry counters
+    vanish between the exporter '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-telemetry-utils
+  method: published
+- file: skills/doca-telemetry/SKILL.md
+  name: doca-telemetry
+  description: 'Use this skill to read DOCA hardware-counter events from a `doca_dev` through the per-domain Telemetry reader libraries: `doca_telemetry_pcc`,
+    `_dpa`, `_diag`, `_adp_retx`, `_phy`, and `_pci`. It covers capability checks, context creation, startup, and per-domain reads or samples.
+    Trigger for implic'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-telemetry
+  method: published
+- file: skills/doca-upgrade/SKILL.md
+  name: doca-upgrade
+  description: 'Changing DOCA versions safely: upgrading or downgrading the host DOCA packages, refreshing the BlueField BFB, bumping the NGC
+    DOCA container tag, or rolling back, with the discipline detect -> report -> ASK -> only then a guided upgrade. Trigger on "is there a newer
+    DOCA", "I want the newest DOCA fe'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-upgrade
+  method: published
+- file: skills/doca-urom-svc/SKILL.md
+  name: doca-urom-svc
+  description: 'Operate the DOCA UROM Service container on BlueField Arm for remote memory operations (puts, gets, atomics, collectives) enqueued
+    by a paired host using `doca-urom`: pull the NGC image, choose the UCX component, size queues, configure Comch pairing, and align host and
+    service versions. SECURITY: the'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-urom-svc
+  method: published
+- file: skills/doca-urom/SKILL.md
+  name: doca-urom
+  description: 'Host-side DOCA UROM library (doca_urom_*): offload an HPC / UCX / MPI application''s remote memory operations (puts, gets, atomics,
+    collectives) from the host CPU onto a BlueField DPU. Trigger on "MPI all-reduce burning host CPU", "push UCX traffic onto the BlueField",
+    "first doca_urom call returns N'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-urom
+  method: published
+- file: skills/doca-verbs/SKILL.md
+  name: doca-verbs
+  description: 'Raw verbs inside DOCA Core (doca-verbs): direct control of QP, CQ, PD, SRQ and address-handle objects through doca_verbs_context,
+    doca_verbs_qp_create / doca_verbs_qp_modify and doca_verbs_cq_create, porting libibverbs code into DOCA Core, or a QP attribute, opcode or
+    WR flag the doca-rdma task API '
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-verbs
+  method: published
+- file: skills/doca-version/SKILL.md
+  name: doca-version
+  description: 'DOCA version handling: detect the installed release and validate the four-way match across pkg-config doca-common, applications/VERSION,
+    doca_caps --version, and bfver/mlnx-release on BlueField; reason about NGC tags; look up whether a capability exists on this release; diagnose
+    build-vs-runtime dri'
+  source: https://github.com/NVIDIA/skills/tree/main/skills/doca-version
+  method: published

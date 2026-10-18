@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-spcx-cc/SKILL.md",
+ "status": 200,
+ "bytes": 18943,
+ "sha256": "5f15e12f3418b07abad5e5a5cbe5b69ac1933880d538630cbb0dbd83b564243f",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

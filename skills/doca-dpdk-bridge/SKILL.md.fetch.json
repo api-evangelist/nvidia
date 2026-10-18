@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-dpdk-bridge/SKILL.md",
+ "status": 200,
+ "bytes": 15907,
+ "sha256": "2c02820341c1a2a57f87209726acff85bd97adf2d13351e2d582b2ce2f3ae292",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

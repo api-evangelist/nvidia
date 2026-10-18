@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-bare-metal-deployment/SKILL.md",
+ "status": 200,
+ "bytes": 11608,
+ "sha256": "da5031d88434d693dc3610b7cfef8d19785f2071a80eb6a5cc387be7d16980d9",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}

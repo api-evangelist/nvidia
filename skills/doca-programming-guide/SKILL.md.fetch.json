@@ -1,0 +1,11 @@
+{
+ "url": "https://raw.githubusercontent.com/NVIDIA/skills/main/skills/doca-programming-guide/SKILL.md",
+ "status": 200,
+ "bytes": 14530,
+ "sha256": "45c2fbee9dd46dc9f3c3a2344b7baf53d8fcdb55829b53888c8e48ee59fb7e78",
+ "fetched_at": "2026-10-18",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "found_on": "https://github.com/NVIDIA/skills",
+ "license": "Apache-2.0"
+}
