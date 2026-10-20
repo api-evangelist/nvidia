@@ -264,6 +264,215 @@ edges:
     detected: '2026-10-19'
   detected_by: sweep-cloud-native.py
   first_seen: '2026-10-15'
+- partner_name: Khronos Group conformant products
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://www.khronos.org/conformance/adopters/conformant-products/vulkan#submission_1003
+  category: graphics API conformance
+  channel: standard-directory
+  relationship: standard-participant
+  contract_reference:
+    register: Khronos Group conformant products + API adopters (khronos.org/conformance/adopters)
+    standard: Khronos conformance
+    spec_file: null
+    role: khronos-conformant-adopter
+    registered_name: NVIDIA Corporation
+    register_id: https://www.khronos.org/conformance/adopters/conformant-products/vulkan#submission_1003
+    matched_domain: nvidia.com
+    matched_by: domain+name-among-holders
+    certified_products:
+    - product: OpenCL
+      lapsed: false
+      newest_submission: '2025-07-16'
+      versions:
+      - OpenCL_1_0
+      - OpenCL_1_1
+      - OpenCL_1_2
+      - OpenCL_3_0
+      submissions_listed: 51
+    - product: OpenGL
+      lapsed: false
+      newest_submission: '2026-10-01'
+      versions:
+      - OpenGL_4_4
+      - OpenGL_4_5
+      - OpenGL_4_6
+      submissions_listed: 149
+    - product: OpenGL ES
+      lapsed: false
+      newest_submission: '2026-10-01'
+      versions:
+      - OpenGL_ES_2_0
+      - OpenGL_ES_3_0
+      - OpenGL_ES_3_1
+      - OpenGL_ES_3_2
+      submissions_listed: 202
+    - product: OpenKODE
+      lapsed: false
+      newest_submission: '2008-03-05'
+      versions:
+      - OpenKODE_1_0
+      submissions_listed: 2
+    - product: OpenVG
+      lapsed: false
+      newest_submission: '2008-03-09'
+      versions:
+      - OpenVG_1_0
+      submissions_listed: 4
+    - product: OpenVX
+      lapsed: false
+      newest_submission: '2015-09-16'
+      versions:
+      - OpenVX_1_0
+      submissions_listed: 7
+    - product: OpenXR
+      lapsed: false
+      newest_submission: '2025-06-18'
+      versions:
+      - OpenXR_1_0_and_1_1
+      submissions_listed: 1
+    - product: Vulkan
+      lapsed: false
+      newest_submission: '2026-10-01'
+      versions:
+      - Vulkan_1_1
+      - Vulkan_1_2
+      - Vulkan_1_3
+      - Vulkan_1_4
+      submissions_listed: 174
+    - product: Vulkan SC
+      lapsed: false
+      newest_submission: '2026-01-16'
+      versions:
+      - Vulkan_SC_1_0
+      submissions_listed: 25
+    products_sample:
+    - A100
+    - A40
+    - AP10
+    - AP15 and AP15L
+    - 'Compute Device Extensions:'
+    - Drive CX2
+    - Drive PX2
+    - GeForce 2xx
+    - GeForce 8100 / nForce 720a
+    - GeForce 8100 mGPU
+    signal_note: certified_products = one entry per Khronos API the company is a conformant adopter of (the API
+      Adopters page), never per submission or product; dates, versions and submission counts are context. Khronos
+      marks no conformance as superseded or lapsed, so lapsed is false
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
+- partner_name: Khronos Group conformant products (OpenXR)
+  partner: null
+  partner_match: register
+  type: register
+  direction: partner-built
+  evidence: https://www.khronos.org/conformance/adopters/conformant-products/vulkan#submission_1003
+  category: graphics API conformance
+  channel: standard-directory
+  relationship: compatible
+  shape: openxr
+  evidence_kind: conformance-register
+  degree: certified
+  report_only: true
+  note: an OpenXR runtime passed the OpenXR CTS and Khronos accepted the submission (anchor openxr)
+  contract_reference:
+    register: Khronos Group conformant products + API adopters (khronos.org/conformance/adopters)
+    spec_file: null
+    standard: OpenXR
+    role: openxr-conformance
+    registered_name: NVIDIA Corporation
+    matched_domain: nvidia.com
+    newest_submission: '2025-06-18'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
+- partner_name: Khronos Group (members)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.khronos.org/members/list
+  category: graphics standards body membership
+  partner_tier: promoter
+  contract_reference:
+    register: Khronos Group members list (khronos.org/members/list)
+    standard: Khronos Group
+    spec_file: null
+    role: khronos-member
+    registered_name: NVIDIA Corporation
+    register_id: https://www.khronos.org/members/list
+    matched_domain: nvidia.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: membership level is partner_tier, never counted'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
+- partner_name: Alliance for OpenUSD (AOUSD)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://aousd.org/members/
+  category: OpenUSD standards body
+  partner_tier: steering
+  contract_reference:
+    register: Alliance for OpenUSD members (aousd.org/members; landscape.aousd.org/data/full.json)
+    standard: OpenUSD
+    spec_file: null
+    role: aousd-member
+    registered_name: NVIDIA Corporation
+    register_id: aousd-members--steering--nvidia-corporation
+    matched_domain: nvidia.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: steering / general is partner_tier, never counted'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
+- partner_name: Khronos file format adopters
+  partner: null
+  partner_match: register-name
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.khronos.org/conformance/adopters/file-format-adopters
+  category: 3D file format adoption
+  contract_reference:
+    register: Khronos file format adopters (khronos.org/conformance/adopters/file-format-adopters)
+    standard: Khronos file formats
+    spec_file: null
+    role: file-format-adopter
+    registered_name: NVIDIA
+    register_id: https://www.khronos.org/conformance/adopters/file-format-adopters
+    matched_domain: null
+    matched_by: register-name
+    register_name_note: register-name 'nvidia' = nvidia; wikidata P856 nvidia.cn, nvidia.com agrees or unheld
+    specs_adopted:
+    - COLLADA
+    - NNEF
+    - SPIR-V
+    - glTF
+    signal_note: 'participation only: a self-filed adopter registration (free, no conformance test); specs adopted
+      are context'
+    detected_by: sweep-xr-graphics.py
+    detected: '2026-10-20'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  detected_by: sweep-xr-graphics.py
+  first_seen: '2026-10-20'
 generated: '2026-10-13'
 method: searched
 checked:
@@ -284,6 +493,11 @@ checked:
 - https://repo.ros2.org/rosdistro_cache/jazzy-cache.yaml.gz
 - https://repo.ros2.org/rosdistro_cache/kilted-cache.yaml.gz
 - https://repo.ros2.org/rosdistro_cache/rolling-cache.yaml.gz
+- https://landscape.aousd.org/data/full.json
+- https://www.khronos.org/conformance/adopters/conformant-companies
+- https://www.khronos.org/conformance/adopters/conformant-products
+- https://www.khronos.org/conformance/adopters/file-format-adopters
+- https://www.khronos.org/members/list
 marketplace_apps: []
 source:
 - https://marketplace.visualstudio.com/vscode
