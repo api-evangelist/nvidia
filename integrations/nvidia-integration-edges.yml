@@ -521,6 +521,94 @@ edges:
     detected: '2026-10-21'
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: RISC-V International (members)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://riscv.org/members/
+  category: processor ISA standards body membership
+  partner_tier: premier-board
+  contract_reference:
+    register: RISC-V International members (riscv.org/members; riscv.landscape2.io/data/full.json)
+    standard: RISC-V ISA
+    spec_file: null
+    role: risc-v-member
+    registered_name: NVIDIA Corporation
+    register_id: risc-v-members--premier-board--nvidia-corporation-member
+    matched_domain: nvidia.com
+    matched_by: domain+name-among-holders
+    signal_note: 'participation only: membership level is partner_tier, never counted'
+    detected_by: sweep-semiconductor-consortia.py
+    detected: '2026-10-21'
+  detected_by: sweep-semiconductor-consortia.py
+  first_seen: '2026-10-21'
+- partner_name: Open Compute Project marketplace
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.opencompute.org/marketplace/it-infrastructure/nvidia-connectx-8-supernic-for-ocp-3-0/
+  category: data-center hardware recognition
+  contract_reference:
+    register: Open Compute Project marketplace (opencompute.org/products; /wp-json/wp/v2/marketplace + /companies)
+    standard: Open Compute Project
+    spec_file: null
+    role: ocp-recognised-product-vendor
+    registered_name: NVIDIA
+    register_id: https://www.opencompute.org/members/nvidia/
+    matched_domain: nvidia.com
+    matched_by: domain+name-among-holders
+    listings: 11
+    recognised_listings: 11
+    products_sample:
+    - NVIDIA ConnectX®-6 Dx Dual-port 100GbE NIC and Time Card
+    - NVIDIA ConnectX®-7 NIC Single-Port 400Gb/s OCP 3.0
+    - NVIDIA ConnectX®-8 SuperNIC for OCP 3.0
+    - NVIDIA DGX™ B200
+    - NVIDIA DGX™ GB200
+    - NVIDIA Mellanox ConnectX®-6 Dx Dual Port 100GbE OCP3.0
+    - NVIDIA Mellanox ConnectX®-6 Dx Dual Port 25GbE OCP3.0
+    - NVIDIA Mellanox ConnectX®-6 Dx Dual Port 50GbE OCP3.0
+    - NVIDIA Mellanox ConnectX®-6 Dx Single Port 100GbE OCP3.0, Multi Host
+    - NVIDIA Mellanox ConnectX®-6 Dx Single Port 200GbE OCP3.0
+    signal_note: certified_products = one entry per product type (OCP recognition + most specific marketplace segment)
+      among OCP-recognised listings; unrecognised listings are listing alone (participation). The REST data marks
+      no listing archived, so lapsed is false. Listing counts are context, never counted
+    detected_by: sweep-semiconductor-consortia.py
+    detected: '2026-10-21'
+    certified_products:
+    - product: 'OCP Accepted: GPU Systems'
+      recognition: OCP Accepted
+      product_type: GPU Systems
+      lapsed: false
+      listings: 2
+      newest_listing: '2024-12-06'
+    - product: 'OCP Accepted: IT Infrastructure'
+      recognition: OCP Accepted
+      product_type: IT Infrastructure
+      lapsed: false
+      listings: 2
+      newest_listing: '2024-12-06'
+    - product: 'OCP Accepted: Network Interface Cards (NICs)'
+      recognition: OCP Accepted
+      product_type: Network Interface Cards (NICs)
+      lapsed: false
+      listings: 9
+      newest_listing: '2026-04-24'
+    - product: 'OCP Accepted: Time Synchronization'
+      recognition: OCP Accepted
+      product_type: Time Synchronization
+      lapsed: false
+      listings: 1
+      newest_listing: '2021-11-08'
+  detected_by: sweep-semiconductor-consortia.py
+  first_seen: '2026-10-21'
+  partner_tier: OCP Accepted
 generated: '2026-10-13'
 method: searched
 checked:
@@ -553,6 +641,13 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- https://riscv.landscape2.io/data/full.json
+- https://riscv.org/members/
+- https://www.nist.gov/chips/chips-program-office-awards
+- https://www.nist.gov/chips/chips-rd-office-awards
+- https://www.opencompute.org/products
+- https://www.opencompute.org/wp-json/wp/v2/companies
+- https://www.opencompute.org/wp-json/wp/v2/marketplace
 marketplace_apps: []
 source:
 - https://marketplace.visualstudio.com/vscode
