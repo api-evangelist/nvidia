@@ -854,6 +854,40 @@ edges:
   category: configuration-management content listing (Ansible collection)
   badges:
   - Verified publisher (GitHub domain-verified organization)
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain+name-among-holders
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/nvidia
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim
+  - nvidia/PhysicalAI-Autonomous-Vehicles
+  - nvidia/simready-assets
+  - nvidia/PhysicalAI-Robotics-Open-H-Embodiment
+  - nvidia/SAGE-10k
+  - nvidia/PhysicalAI-Robotics-Manipulation-Kitchen-Demos
+  - nvidia/OpenMathInstruct-2
+  - nvidia/PhysicalAI-SmartSpaces
+  - nvidia/LocateAnything
+  - nvidia/parakeet-tdt-0.6b-v2
+  - nvidia/describe-anything-model-demo
+  - nvidia/Kimodo
+  - nvidia/PartPacker
+  - nvidia/music-flamingo
+  - nvidia/canary-1b
+  - nvidia/parakeet-tdt-0.6b-v3
+  listing_count: 2
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-13'
 method: searched
 checked:
@@ -906,6 +940,7 @@ checked:
 - https://www.bestpractices.dev/en/projects.json
 - https://www.bestpractices.dev/en/projects.json?page=N
 - ansible/integrations/ansible-integration-edges.yml
+- hugging-face/integrations/hugging-face-integration-edges.yml
 marketplace_apps: []
 source:
 - https://marketplace.visualstudio.com/vscode
